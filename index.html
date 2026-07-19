@@ -1,0 +1,1331 @@
+﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>大学生网红签约就是必输局?</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/v4-shims.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/wordcloud@1.2.2/src/wordcloud2.min.js"></script>
+<script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#165DFF',
+                        secondary: '#722ED1',
+                        accent: '#00B42A',
+                        warning: '#FF7D00',
+                        danger: '#F53F3F',
+                        light: '#F2F3F5',
+                        dark: '#1D2129'
+                    },
+                    fontFamily: {
+                        inter: ['Inter', 'PingFang SC', 'Microsoft YaHei', 'sans-serif'],
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.6s ease-in-out',
+                        'slide-up': 'slideUp 0.8s ease-out',
+                        'bounce-in': 'bounceIn 1s ease-out'
+                    }
+                }
+            }
+        }
+    </script>
+<style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .gradient-bg {
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            }
+            .card-hover {
+                transition: all 0.3s ease;
+            }
+            .card-hover:hover {
+                transform: translateY(-8px);
+                box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            }
+            .keyword-tag {
+                transition: all 0.2s ease;
+            }
+            .keyword-tag:hover {
+                transform: scale(1.05);
+                background-color: #165DFF;
+                color: white;
+            }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes slideUp {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        @keyframes bounceIn {
+            0% { transform: scale(0.3); opacity: 0; }
+            50% { transform: scale(1.05); }
+            70% { transform: scale(0.9); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+    </style>
+<style>
+/* ===== 思源宋体 ===== */
+@font-face{font-family:'Source Serif SC';src:url('思源宋体SC-Medium.otf') format('opentype');font-weight:500;font-display:swap;}
+/* ===== 互动区：纯文字交互（无头像/ID/气泡） ===== */
+html{scroll-behavior:smooth;}
+.game-section{
+  --bg:#e9f0f7; --text:#22303e; --reply:#3f72a8; --hint:#7d93aa;
+  position:relative; height:100vh; overflow:hidden;
+  background:var(--bg); transition:background 1.2s ease;
+  font-family:'Source Serif SC',"Noto Serif SC",Georgia,serif;
+}
+.game-section.danger{ background:#2b0d0d; }
+.g-stage{ position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:24px; opacity:0; pointer-events:none; transition:opacity .8s ease; }
+.g-stage.active{ opacity:1; pointer-events:auto; }
+#g-title{cursor:pointer;}
+#g-intro{cursor:pointer;}
+#g-title h1{ font-size:clamp(40px,8vw,84px); letter-spacing:.15em; font-weight:900; color:var(--text); }
+#g-title .g-sub{ margin-top:18px; font-size:clamp(14px,2.2vw,20px); color:var(--reply); letter-spacing:.3em; }
+.g-hint{ position:absolute; bottom:6vh; left:0; right:0; text-align:center; font-size:14px; color:var(--hint); animation:gBreath 1.6s ease-in-out infinite; }
+.game-section.danger .g-hint{ color:#c98a8a; }
+@keyframes gBreath{0%,100%{opacity:.35}50%{opacity:1}}
+#g-intro p{ max-width:640px; font-size:clamp(17px,2.6vw,24px); line-height:2; text-align:center; color:var(--text); }
+#g-chat{ justify-content:flex-start; padding-top:11vh; cursor:default; }
+.g-text-area{ width:100%; max-width:720px; display:flex; flex-direction:column; gap:26px; }
+.g-divider{ text-align:center; font-size:13px; color:#93a5b8; letter-spacing:.25em; animation:gPop .45s ease; }
+.game-section.danger .g-divider{ color:#c98a8a; }
+.g-left{ text-align:left; font-size:18px; line-height:2.05; color:var(--text); white-space:pre-line; animation:gPop .45s ease; }
+.g-left.danger{ color:#ff3b3b; font-weight:900; text-shadow:0 0 8px rgba(255,0,0,.4); }
+.g-right{ text-align:right; font-size:17px; line-height:1.9; color:var(--reply); white-space:pre-line; animation:gPop .45s ease; }
+.game-section.danger .g-right{ color:#e8a9a9; }
+.g-typing{ text-align:left; font-size:18px; color:#93a5b8; letter-spacing:.3em; animation:gBreath 1s infinite; }
+@keyframes gPop{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.g-reply-area{ width:100%; max-width:720px; margin-top:38px; text-align:right; }
+.g-reply-btn{ cursor:pointer; font-size:17px; color:var(--reply); text-decoration:underline; text-underline-offset:5px; animation:gBreath 1.6s ease-in-out infinite; }
+.g-reply-btn::after{ content:" ▸"; }
+.game-section.danger .g-reply-btn{ color:#ff8a8a; }
+#g-end h2{ font-size:clamp(24px,4.5vw,40px); color:#ff5b5b; letter-spacing:.1em; margin-bottom:26px; text-align:center; }
+#g-end p{ max-width:640px; font-size:clamp(14px,2.2vw,18px); line-height:2.1; text-align:center; color:#e8c9c9; }
+#g-end .g-tips{ margin-top:26px; font-size:13.5px; color:#a87; line-height:2; }
+
+/* ===== 标题封面页 ===== */
+.cover-page{
+  height:100vh; display:flex; align-items:center; justify-content:center;
+  cursor:pointer; overflow:hidden; position:relative;
+  font-family:'Source Serif SC','Noto Serif SC',Georgia,serif;
+}
+.cover-bg{
+  position:absolute; inset:0;
+  background:linear-gradient(160deg, #0f172a 0%, #1e293b 40%, #162240 70%, #0f172a 100%);
+}
+.cover-bg::before{
+  content:''; position:absolute; top:-40%; left:-20%; width:70%; height:140%;
+  background:radial-gradient(ellipse, rgba(22,93,255,.12) 0%, transparent 70%);
+}
+.cover-bg::after{
+  content:''; position:absolute; bottom:-30%; right:-15%; width:60%; height:120%;
+  background:radial-gradient(ellipse, rgba(114,46,209,.1) 0%, transparent 70%);
+}
+.cover-content{
+  position:relative; z-index:1; text-align:center; padding:40px;
+  animation:coverFadeIn 1.2s ease;
+}
+@keyframes coverFadeIn{ from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:none} }
+.cover-label{
+  display:inline-block; font-size:12px; letter-spacing:.35em; color:rgba(255,255,255,.4);
+  text-transform:uppercase; margin-bottom:24px; font-weight:500;
+  padding:4px 18px; border:1px solid rgba(255,255,255,.1); border-radius:20px;
+}
+.cover-title{
+  font-size:clamp(44px,8vw,88px); font-weight:900; color:#fff;
+  letter-spacing:.06em; margin-bottom:16px; line-height:1.15;
+}
+.cover-sub{
+  font-size:clamp(16px,2.5vw,22px); color:rgba(255,255,255,.5);
+  letter-spacing:.2em; margin-bottom:48px;
+}
+.cover-hint{
+  font-size:14px; color:rgba(255,255,255,.25);
+  animation:gBreath 1.8s ease-in-out infinite;
+}
+/* ===== 左侧导航栏 - 时间轴风格 ===== */
+#sideNav{
+  position:fixed; left:18px; top:50%; transform:translateY(-50%); z-index:60;
+  display:flex; flex-direction:column; gap:2px;
+  background:rgba(15,23,42,.82); backdrop-filter:blur(20px) saturate(200%);
+  -webkit-backdrop-filter:blur(20px) saturate(200%);
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:16px; padding:18px 10px 18px 16px;
+  box-shadow:0 8px 32px rgba(0,0,0,.2);
+  max-height:82vh; overflow-y:auto;
+}
+/* 左侧竖线 */
+#sideNav::before{
+  content:''; position:absolute; left:26px; top:28px; bottom:28px;
+  width:1px; background:rgba(255,255,255,.1);
+}
+#sideNav a{
+  display:flex; align-items:center; gap:12px;
+  font-size:13px; color:rgba(255,255,255,.5);
+  text-decoration:none; padding:8px 14px 8px 4px; border-radius:10px;
+  white-space:nowrap; transition:all .3s cubic-bezier(.4,0,.2,1);
+  font-family:'Source Serif SC',"Noto Serif SC",Georgia,serif;
+  position:relative;
+}
+/* 圆点 */
+#sideNav a::before{
+  content:''; flex-shrink:0;
+  width:8px; height:8px; border-radius:50%;
+  background:rgba(255,255,255,.15);
+  border:1.5px solid rgba(255,255,255,.25);
+  transition:all .3s cubic-bezier(.4,0,.2,1);
+}
+#sideNav a:hover{
+  color:#fff; background:rgba(255,255,255,.06);
+}
+#sideNav a:hover::before{
+  background:rgba(22,93,255,.5); border-color:rgba(22,93,255,.7);
+  box-shadow:0 0 10px rgba(22,93,255,.4);
+}
+#sideNav a.active{
+  color:#fff !important; font-weight:700;
+  background:linear-gradient(135deg, rgba(22,93,255,.25), rgba(114,46,209,.2)) !important;
+  padding-right:20px;
+}
+#sideNav a.active::before{
+  background:#fff; border-color:#165DFF;
+  box-shadow:0 0 14px rgba(22,93,255,.7), 0 0 4px rgba(22,93,255,.5);
+  width:10px; height:10px;
+}
+#sideNav a.active::after{
+  content:none; /* 去掉旧的左侧条 */
+}
+
+/* 小屏幕 */
+@media (max-width:860px){
+  #sideNav{ left:4px; border-radius:12px; padding:10px 4px 10px 8px; }
+  #sideNav::before{ left:16px; }
+  #sideNav a{ font-size:0; padding:8px 4px; gap:6px; justify-content:center; }
+  #sideNav a::before{ width:7px; height:7px; }
+  #sideNav a.active::before{ width:9px; height:9px; }
+}
+
+/* ===== 数据板块 - 编辑级设计 ===== */
+/* section 通用头部 */
+.section-head{ text-align:center; margin-bottom:48px; }
+.section-tag{
+  display:inline-block; font-size:11px; letter-spacing:.25em; text-transform:uppercase;
+  color:rgba(22,93,255,.7); font-weight:600; margin-bottom:12px;
+  padding:3px 14px; border-radius:20px; background:rgba(22,93,255,.06);
+}
+.section-title{
+  font-size:clamp(28px,4vw,42px); font-weight:800; color:#1a1a2e; letter-spacing:-.02em;
+  margin-bottom:10px; line-height:1.2;
+}
+.section-desc{ font-size:15px; color:#7b8496; max-width:460px; margin:0 auto; line-height:1.6; }
+
+/* 主题分布 */
+.dist-wrap{
+  display:flex; align-items:center; gap:48px;
+  background:#fff; border-radius:20px; padding:40px 48px;
+  box-shadow:0 1px 3px rgba(0,0,0,.04), 0 8px 32px rgba(0,0,0,.05);
+}
+.dist-chart{ flex:1; max-width:420px; }
+.dist-stats{ flex:0 0 260px; display:flex; flex-direction:column; gap:20px; }
+.dist-stat{
+  display:flex; align-items:baseline; gap:10px; flex-wrap:wrap;
+  padding:14px 0; border-bottom:1px solid #f0f1f5;
+}
+.dist-stat:last-child{ border-bottom:none; }
+.dist-stat-val{
+  font-size:34px; font-weight:800; color:var(--accent); line-height:1;
+}
+.dist-stat-label{ font-size:14px; color:#4a5568; flex:1; min-width:0; }
+.dist-stat-pct{
+  font-size:13px; font-weight:600; color:var(--accent);
+  background:color-mix(in srgb, var(--accent) 8%, transparent);
+  padding:3px 10px; border-radius:10px;
+}
+@media (max-width:768px){
+  .dist-wrap{ flex-direction:column; padding:28px 24px; gap:28px; }
+  .dist-chart{ max-width:100%; }
+  .dist-stats{ flex:unset; width:100%; }
+}
+
+/* 主题卡片 */
+.topic-card{
+  display:flex; gap:28px; background:#fff; border-radius:20px; padding:36px 40px;
+  margin-bottom:20px; position:relative; overflow:hidden;
+  box-shadow:0 1px 3px rgba(0,0,0,.04), 0 8px 28px rgba(0,0,0,.05);
+  transition:box-shadow .3s ease, transform .3s ease;
+}
+.topic-card:hover{ box-shadow:0 2px 6px rgba(0,0,0,.06), 0 16px 48px rgba(0,0,0,.08); transform:translateY(-2px); }
+.topic-card::before{
+  content:''; position:absolute; top:0; left:0; width:4px; height:100%;
+  background:var(--t-accent); border-radius:4px 0 0 4px;
+}
+.topic-num{
+  flex-shrink:0; width:52px; height:52px; border-radius:14px;
+  display:flex; align-items:center; justify-content:center;
+  font-size:22px; font-weight:800; color:#fff;
+  background:var(--t-accent);
+}
+.topic-body{ flex:1; min-width:0; }
+.topic-name{
+  font-size:1.15rem; font-weight:700; color:#1a1a2e; margin-bottom:4px; line-height:1.4;
+}
+.topic-meta{ font-size:13px; color:#8b93a5; margin-bottom:12px; }
+.topic-desc{ font-size:14.5px; color:#4a5568; line-height:1.75; margin-bottom:18px; }
+.topic-kw{ display:flex; flex-wrap:wrap; gap:8px 14px; align-items:baseline; }
+.topic-kw span{
+  display:inline-block; color:var(--t-accent); font-weight:600; opacity:.78;
+  transition:opacity .2s; cursor:default; line-height:1.5;
+}
+.topic-kw span:hover{ opacity:1; }
+@media (max-width:640px){
+  .topic-card{ flex-direction:column; gap:18px; padding:28px 24px; }
+  .topic-num{ width:40px; height:40px; font-size:18px; border-radius:12px; }
+}
+
+/* 词云 */
+.wc-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+.wc-card{
+  background:#fff; border-radius:20px; padding:28px 16px 20px; text-align:center;
+  box-shadow:0 1px 3px rgba(0,0,0,.04), 0 8px 28px rgba(0,0,0,.05);
+  position:relative; overflow:hidden;
+}
+.wc-card::after{
+  content:''; position:absolute; top:0; left:0; right:0; height:3px;
+  background:var(--wc-accent); border-radius:3px 3px 0 0;
+}
+.wc-label{
+  display:flex; justify-content:center; margin-bottom:8px;
+}
+.wc-label span{
+  display:inline-block; font-size:13px; font-weight:700; color:var(--wc-accent);
+  padding:4px 16px; border-radius:12px;
+  background:color-mix(in srgb, var(--wc-accent) 8%, transparent);
+}
+@media (max-width:768px){ .wc-grid{ grid-template-columns:1fr; } }
+
+/* ===== 人物案例栏 ===== */
+.char-bar{
+  position:fixed; right:80px; top:50%; transform:translateY(-50%); z-index:65;
+  display:flex; flex-direction:column; gap:14px;
+  opacity:0; pointer-events:none;
+  transition:opacity .6s ease;
+}
+.char-bar.visible{ opacity:1; pointer-events:auto; }
+.char-item{
+  width:88px; height:88px; border-radius:50%; cursor:pointer; position:relative;
+  display:flex; align-items:center; justify-content:center;
+  font-size:13px; font-weight:700; color:#fff; transition:transform .25s, box-shadow .25s;
+  box-shadow:0 3px 12px rgba(0,0,0,.15);
+}
+.char-item:hover{ transform:scale(1.12); box-shadow:0 6px 24px rgba(0,0,0,.22); }
+.char-item:nth-child(1){ background:transparent; }
+.char-item:nth-child(2){ background:transparent; }
+.char-item:nth-child(3){ background:transparent; }
+.char-item:nth-child(4){ background:transparent; }
+.char-item:nth-child(5){ background:transparent; }
+.char-tip{
+  position:absolute; right:72px; top:50%; transform:translateY(-50%);
+  background:rgba(15,23,42,.92); color:#fff; padding:16px 20px; border-radius:12px;
+  font-size:13px; line-height:1.8; white-space:normal; width:280px;
+  opacity:0; pointer-events:none; transition:opacity .3s;
+  backdrop-filter:blur(8px); box-shadow:0 4px 20px rgba(0,0,0,.25);
+}
+.char-tip strong{ display:block; font-size:15px; margin-bottom:6px; color:#FFE795; }
+.char-item:hover .char-tip{ opacity:1; }
+/* 段落悬浮联动高亮人物栏 */
+.char-item.highlight{ transform:scale(1.12); box-shadow:0 6px 24px rgba(0,0,0,.22); }
+.char-item.highlight .char-tip{ opacity:1; }
+@media (max-width:860px){
+  .char-bar{ right:4px; gap:8px; }
+  .char-item{ width:40px; height:40px; font-size:11px; }
+  .char-tip{ width:220px; font-size:12px; right:52px; }
+}
+
+/* ===== 正文段落：首行缩进 + 段间距 ===== */
+#sec-article p{
+  text-indent:2em; margin-bottom:1.2em;
+}
+/* 云开见日配套文字：初始隐藏，逐行淡入 */
+.cr-text-line{
+  opacity:0; transition:opacity .8s ease;
+}
+.cr-text-line.visible{ opacity:1; }
+/* 图表淡入动画 */
+.chart-fade{
+  opacity:0; transform:translateY(24px);
+  transition:opacity .8s ease, transform .8s ease;
+}
+.chart-fade.visible{ opacity:1; transform:translateY(0); }
+</style>
+</head>
+<body style="background:#e9f0f7;">
+<!-- 标题封面页 -->
+<div id="cover" class="cover-page">
+  <img src="标题封面.PNG" alt="封面" style="width:100%;height:100%;object-fit:cover;">
+  <p class="cover-hint" style="position:absolute;bottom:6vh;z-index:2;">点击任意位置进入</p>
+</div>
+
+<section id="game" class="game-section">
+  <div class="g-stage active" id="g-intro">
+    <p>你是一名想利用课余时间做短视频兼职的大二学生，今天，你收到了自称方片传媒公司运营人员的私信。</p>
+    <p class="g-hint">点击任意位置继续</p>
+  </div>
+  <div class="g-stage" id="g-chat">
+    <div class="g-text-area" id="gTextArea"></div>
+    <div class="g-reply-area" id="gReplyArea" style="visibility:hidden">
+      <span class="g-reply-btn" id="gReplyBtn"></span>
+    </div>
+    <p class="g-hint" id="gChatHint" style="display:none">你没有拒绝的选项</p>
+  </div>
+</section>
+<div id="news" class="text-dark font-inter" style="background:#e9f0f7;">
+    <!-- 主要内容区域 -->
+    <main class="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
+
+
+
+    </main>
+
+    <!-- 回到顶部按钮 -->
+    <button id="backToTop" 
+            class="fixed bottom-6 right-6 bg-primary text-white p-3 rounded-full shadow-lg hover:bg-primary/90 transition-all transform scale-0 opacity-0">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+</div>
+<nav id="sideNav">
+  <a href="#sec-intro">引言</a>
+  <a href="#sec-promise">口头画饼与纸面枷锁</a>
+  <a href="#sec-business">MCN的生意经</a>
+  <a href="#sec-victim">谁在买单？</a>
+  <a href="#sec-regulate">监管亮剑</a>
+  <a href="#sec-ending">尾声</a>
+</nav>
+<script>
+        // 回到顶部功能
+        const backToTopBtn = document.getElementById('backToTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopBtn.classList.remove('scale-0', 'opacity-0');
+                backToTopBtn.classList.add('scale-100', 'opacity-100');
+            } else {
+                backToTopBtn.classList.add('scale-0', 'opacity-0');
+                backToTopBtn.classList.remove('scale-100', 'opacity-100');
+            }
+        });
+
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // 滚动动画
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-slide-up');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // 关键词标签交互
+        document.querySelectorAll('.keyword-tag').forEach(tag => {
+            tag.addEventListener('click', () => {
+                tag.classList.toggle('bg-primary');
+                tag.classList.toggle('text-white');
+            });
+        });
+
+        // ========== Chart.js 图表初始化 ==========
+
+        // 1. 主题分布环形图
+        (function() {
+            const ctx = document.getElementById('topicDistChart');
+            if (!ctx) return;
+            new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['主题1：合同与违约金纠纷', '主题2：解约避坑与方法指南', '主题3：法律维权与账号归属'],
+                    datasets: [{
+                        data: [263, 188, 186],
+                        backgroundColor: ['#F53F3F', '#FF7D00', '#165DFF'],
+                        borderColor: '#ffffff',
+                        borderWidth: 3,
+                        hoverBorderWidth: 4,
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: { padding: 20, usePointStyle: true, font: { size: 13 } }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(ctx) {
+                                    const total = ctx.dataset.data.reduce((a, b) => a + b, 0);
+                                    const pct = ((ctx.raw / total) * 100).toFixed(1);
+                                    return ctx.label + ': ' + ctx.raw + '条 (' + pct + '%)';
+                                }
+                            }
+                        }
+                    },
+                }
+            });
+        })();
+
+        // 2. 主题数选择曲线（双Y轴：一致性分数 + 困惑度）
+        (function() {
+            const ctx = document.getElementById('kSelectionChart');
+            if (!ctx) return;
+            const ks = [2, 3, 4, 5, 6, 7, 8, 9, 10];
+            const coherence = [0.589, 0.655, 0.621, 0.593, 0.558, 0.531, 0.502, 0.475, 0.448];
+            const perplexity = [155.2, 148.2, 157.6, 168.2, 175.1, 180.1, 188.5, 195.3, 202.8];
+
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ks,
+                    datasets: [
+                        {
+                            label: '一致性分数 (Coherence)',
+                            data: coherence,
+                            borderColor: '#722ED1',
+                            backgroundColor: 'rgba(114,46,209,0.1)',
+                            borderWidth: 3, pointRadius: 5, pointBackgroundColor: '#722ED1',
+                            tension: 0.3, yAxisID: 'y',
+                        },
+                        {
+                            label: '困惑度 (Perplexity)',
+                            data: perplexity,
+                            borderColor: '#FF7D00',
+                            backgroundColor: 'rgba(255,125,0,0.1)',
+                            borderWidth: 3, pointRadius: 5, pointBackgroundColor: '#FF7D00',
+                            tension: 0.3, yAxisID: 'y1',
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    interaction: { mode: 'index', intersect: false },
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: { usePointStyle: true, padding: 16, font: { size: 12 } }
+                        }
+                    },
+                    scales: {
+                        x: { title: { display: true, text: '主题数 K', font: { size: 13 } } },
+                        y: {
+                            type: 'linear', position: 'left',
+                            title: { display: true, text: '一致性分数', font: { size: 13 } },
+                            min: 0.40, max: 0.70,
+                        },
+                        y1: {
+                            type: 'linear', position: 'right',
+                            title: { display: true, text: '困惑度', font: { size: 13 } },
+                            min: 140, max: 210,
+                            grid: { drawOnChartArea: false },
+                        }
+                    }
+                }
+            });
+        })();
+
+        // 3. 三大主题关键词横向对比
+        (function() {
+            const ctx = document.getElementById('keywordCompareChart');
+            if (!ctx) return;
+
+            const topic1KW = ['主播', '违约金', '签约', '合同', '律师'];
+            const topic1WV = [0.0963, 0.0395, 0.0220, 0.0206, 0.0197];
+            const topic2KW = ['成功', '合作', '公会', '避坑', '退会'];
+            const topic2WV = [0.0126, 0.0122, 0.0108, 0.0086, 0.0074];
+            const topic3KW = ['账号', '法律', '合同', '指南', '企业'];
+            const topic3WV = [0.0162, 0.0153, 0.0138, 0.0134, 0.0083];
+
+            const allLabels = [...new Set([...topic1KW, ...topic2KW, ...topic3KW])];
+
+            function buildData(kw, wv) {
+                return allLabels.map(l => { const idx = kw.indexOf(l); return idx >= 0 ? wv[idx] : 0; });
+            }
+
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: allLabels,
+                    datasets: [
+                        {
+                            label: '主题1：合同与违约金纠纷',
+                            data: buildData(topic1KW, topic1WV),
+                            backgroundColor: 'rgba(245,63,63,0.75)', borderColor: '#F53F3F', borderWidth: 1,
+                        },
+                        {
+                            label: '主题2：解约避坑与方法指南',
+                            data: buildData(topic2KW, topic2WV),
+                            backgroundColor: 'rgba(255,125,0,0.75)', borderColor: '#FF7D00', borderWidth: 1,
+                        },
+                        {
+                            label: '主题3：法律维权与账号归属',
+                            data: buildData(topic3KW, topic3WV),
+                            backgroundColor: 'rgba(22,93,255,0.75)', borderColor: '#165DFF', borderWidth: 1,
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: { usePointStyle: true, padding: 16, font: { size: 12 } }
+                        },
+                    },
+                    scales: {
+                        x: { title: { display: true, text: '关键词', font: { size: 13 } } },
+                        y: { title: { display: true, text: '关键词权重', font: { size: 13 } }, beginAtZero: true }
+                    }
+                }
+            });
+        })();
+
+        // 4. 三大主题词云
+        (function() {
+            // 缩放权重到合适字号: weight * scale + base
+            function scaleList(list, base, factor) {
+                const max = Math.max(...list.map(x => x[1]));
+                return list.map(([w, v]) => [w, Math.round(v / max * factor + base)]);
+            }
+
+            // 主题1 关键词（红色系）
+            const t1 = scaleList([
+                ['主播', 0.0963], ['违约金', 0.0395], ['签约', 0.0220], ['合同', 0.0206],
+                ['律师', 0.0197], ['起诉', 0.0117], ['劳动', 0.0108], ['违约', 0.0098],
+                ['天价', 0.0074], ['仲裁', 0.0071], ['传媒', 0.0068], ['账号', 0.0065],
+                ['法律', 0.0062], ['避雷', 0.0058], ['判赔', 0.0055]
+            ], 12, 40);
+
+            // 主题2 关键词（橙色系）
+            const t2 = scaleList([
+                ['成功', 0.0126], ['合作', 0.0122], ['公会', 0.0108], ['避坑', 0.0086],
+                ['退会', 0.0074], ['合同纠纷', 0.0070], ['运营', 0.0066], ['停播', 0.0063],
+                ['怎么办', 0.0060], ['平台', 0.0059], ['套路', 0.0056], ['抖音', 0.0053],
+                ['指南', 0.0050], ['解约', 0.0048], ['维权', 0.0045]
+            ], 12, 40);
+
+            // 主题3 关键词（蓝色系）
+            const t3 = scaleList([
+                ['账号', 0.0162], ['法律', 0.0153], ['合同', 0.0138], ['指南', 0.0134],
+                ['企业', 0.0083], ['负面', 0.0083], ['版权', 0.0078], ['三方', 0.0068],
+                ['字节', 0.0062], ['法务', 0.0053], ['胜诉', 0.0050], ['博主', 0.0048],
+                ['机构', 0.0045], ['退费', 0.0042], ['案例', 0.0040]
+            ], 12, 40);
+
+            const colorSchemes = {
+                wc1: { colors: ['#F53F3F', '#E84242', '#DB3535', '#CE2E2E', '#C12020', '#B81313'] },
+                wc2: { colors: ['#FF7D00', '#F27000', '#E56300', '#D85600', '#CB4900', '#BE3C00'] },
+                wc3: { colors: ['#165DFF', '#1452E8', '#1247D1', '#103CBA', '#0E31A3', '#0C268C'] }
+            };
+
+            const ids = ['wc1', 'wc2', 'wc3'];
+            const data = [t1, t2, t3];
+
+            ids.forEach((id, i) => {
+                const el = document.getElementById(id);
+                if (!el) return;
+                WordCloud(el, {
+                    list: data[i],
+                    gridSize: 10,
+                    weightFactor: 1,
+                    fontFamily: 'PingFang SC, Microsoft YaHei, sans-serif',
+                    color: function() {
+                        const scheme = colorSchemes[id].colors;
+                        return scheme[Math.floor(Math.random() * scheme.length)];
+                    },
+                    rotateRatio: 0.3,
+                    minRotation: -Math.PI / 6,
+                    maxRotation: Math.PI / 6,
+                    backgroundColor: 'transparent',
+                    shape: 'circle',
+                    ellipticity: 0.8,
+                });
+            });
+        })();
+
+        // 5. 加载 JSON 数据并初始化扩展图表
+        (function() {
+            function tryInit() {
+                if (!window.CHART_DATA) { setTimeout(tryInit, 100); return; }
+                const d = window.CHART_DATA;
+                initAvgEngagement(d);
+                initScatter(d);
+                initTop10(d);
+                initTypeDist(d);
+                initSimilarityHeatmap(d);
+                initKwRank(d);
+            }
+            tryInit();
+
+            // --- 各主题平均互动量对比 ---
+            function initAvgEngagement(d) {
+                const ctx = document.getElementById('avgEngagementChart');
+                if (!ctx) return;
+                const eng = d.topicAvgEngagement;
+                const names = d.meta.topicNames;
+                new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: names,
+                        datasets: [
+                            { label: '平均点赞', data: eng.map(x => x.avgLikes), backgroundColor: 'rgba(245,63,63,0.7)', borderColor: '#F53F3F', borderWidth: 1 },
+                            { label: '平均收藏', data: eng.map(x => x.avgCollects), backgroundColor: 'rgba(255,125,0,0.7)', borderColor: '#FF7D00', borderWidth: 1 },
+                            { label: '平均评论', data: eng.map(x => x.avgComments), backgroundColor: 'rgba(22,93,255,0.7)', borderColor: '#165DFF', borderWidth: 1 },
+                            { label: '平均分享', data: eng.map(x => x.avgShares), backgroundColor: 'rgba(114,46,209,0.7)', borderColor: '#722ED1', borderWidth: 1 },
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: { position: 'bottom', labels: { usePointStyle: true, padding: 16, font: { size: 12 } } },
+                            tooltip: { callbacks: { label: ctx => ctx.dataset.label + ': ' + ctx.raw.toFixed(1) } }
+                        },
+                        scales: {
+                            x: { title: { display: true, text: '主题', font: { size: 13 } } },
+                            y: { title: { display: true, text: '平均互动量', font: { size: 13 } }, beginAtZero: true }
+                        }
+                    }
+                });
+            }
+
+            // --- 散点图：点赞 vs 评论 ---
+            function initScatter(d) {
+                const ctx = document.getElementById('scatterChart');
+                if (!ctx) return;
+                const colors = ['#F53F3F', '#FF7D00', '#165DFF'];
+                const datasets = [0, 1, 2].map(t => ({
+                    label: d.meta.topicNames[t],
+                    data: d.scatterData.filter(p => p.topic === t).map(p => ({ x: p.likes, y: p.comments })),
+                    backgroundColor: colors[t] + '88',
+                    borderColor: colors[t],
+                    pointRadius: 3,
+                    pointHoverRadius: 6,
+                }));
+                new Chart(ctx, {
+                    type: 'scatter',
+                    data: { datasets },
+                    options: {
+                        responsive: true,
+                        plugins: { legend: { position: 'bottom', labels: { usePointStyle: true, padding: 16, font: { size: 11 } } } },
+                        scales: {
+                            x: { title: { display: true, text: '点赞数', font: { size: 12 } }, type: 'linear' },
+                            y: { title: { display: true, text: '评论数', font: { size: 12 } }, type: 'linear' },
+                        }
+                    }
+                });
+            }
+
+            // --- Top 10 高热度帖子 ---
+            function initTop10(d) {
+                const ctx = document.getElementById('top10Chart');
+                if (!ctx) return;
+                const posts = d.top10Posts;
+                const colors = ['#F53F3F', '#FF7D00', '#165DFF'];
+                // 反转显示，最高的在最上面
+                const reversed = [...posts].reverse();
+                new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: reversed.map(p => p.title.length > 16 ? p.title.slice(0, 15) + '...' : p.title),
+                        datasets: [{
+                            label: '总互动量',
+                            data: reversed.map(p => p.totalEngagement),
+                            backgroundColor: reversed.map(p => colors[p.topic] + 'CC'),
+                            borderColor: reversed.map(p => colors[p.topic]),
+                            borderWidth: 1,
+                        }]
+                    },
+                    options: {
+                        indexAxis: 'y',
+                        responsive: true,
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: {
+                                callbacks: {
+                                    label: ctx => '互动: ' + ctx.raw + ' | 点赞: ' + posts[posts.length - 1 - ctx.dataIndex].likes +
+                                        ' 收藏: ' + posts[posts.length - 1 - ctx.dataIndex].collects
+                                }
+                            }
+                        },
+                        scales: {
+                            x: { title: { display: true, text: '总互动量', font: { size: 12 } } },
+                        }
+                    }
+                });
+            }
+
+            // --- 内容类型分布（堆叠柱状图） ---
+            function initTypeDist(d) {
+                const ctx = document.getElementById('typeDistChart');
+                if (!ctx) return;
+                const td = d.typeDistribution;
+                new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: d.meta.topicNames,
+                        datasets: [
+                            { label: '图文笔记 (normal)', data: td.map(x => x.normal), backgroundColor: 'rgba(22,93,255,0.7)', borderColor: '#165DFF', borderWidth: 1 },
+                            { label: '视频笔记 (video)', data: td.map(x => x.video), backgroundColor: 'rgba(245,63,63,0.7)', borderColor: '#F53F3F', borderWidth: 1 },
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: { position: 'bottom', labels: { usePointStyle: true, padding: 16, font: { size: 12 } } },
+                        },
+                        scales: {
+                            x: { stacked: true, title: { display: true, text: '主题', font: { size: 13 } } },
+                            y: { stacked: true, title: { display: true, text: '帖子数量', font: { size: 13 } }, beginAtZero: true },
+                        }
+                    }
+                });
+            }
+
+            // --- 主题相似度热力图（CSS 渲染） ---
+            function initSimilarityHeatmap(d) {
+                const el = document.getElementById('similarityHeatmap');
+                if (!el) return;
+                const sim = d.topicSimilarity;
+                const names = ['合同与违约金', '解约避坑方法', '法律维权账号'];
+                function heatColor(v) {
+                    // v: 0→蓝, 0.5→白, 1→红
+                    const r = Math.round(v * 220 + 35);
+                    const g = Math.round((1 - Math.abs(v - 0.5) * 2) * 180 + 40);
+                    const b = Math.round((1 - v) * 220 + 35);
+                    return `rgb(${r},${g},${b})`;
+                }
+                let html = '<div style="display:inline-block;">';
+                html += '<table style="border-collapse:collapse;font-size:13px;">';
+                html += '<tr><td></td>' + names.map(n => '<td style="padding:6px 10px;font-weight:bold;text-align:center;">' + n + '</td>').join('') + '</tr>';
+                for (let i = 0; i < 3; i++) {
+                    html += '<tr><td style="padding:6px 10px;font-weight:bold;">' + names[i] + '</td>';
+                    for (let j = 0; j < 3; j++) {
+                        const v = sim[i][j];
+                        const bg = heatColor(v);
+                        const tc = v > 0.7 ? '#fff' : '#1D2129';
+                        html += '<td style="padding:12px 16px;text-align:center;background:' + bg + ';color:' + tc + ';font-weight:bold;border:2px solid #fff;border-radius:4px;">' + v.toFixed(2) + '</td>';
+                    }
+                    html += '</tr>';
+                }
+                html += '</table></div>';
+                el.innerHTML = html;
+            }
+
+            // --- 词权重排名小图（3个） ---
+            function initKwRank(d) {
+                const colors = ['#F53F3F', '#FF7D00', '#165DFF'];
+                for (let t = 0; t < 3; t++) {
+                    const ctx = document.getElementById('kwRank' + (t + 1));
+                    if (!ctx) continue;
+                    const kw = d.topicKeywords[t];
+                    const reversed = [...kw].reverse();
+                    new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels: reversed.map(x => x.word),
+                            datasets: [{
+                                label: '权重',
+                                data: reversed.map(x => x.weight),
+                                backgroundColor: colors[t] + 'AA',
+                                borderColor: colors[t],
+                                borderWidth: 1,
+                            }]
+                        },
+                        options: {
+                            indexAxis: 'y',
+                            responsive: true,
+                            plugins: { legend: { display: false } },
+                            scales: {
+                                x: { title: { display: true, text: '权重', font: { size: 11 } }, beginAtZero: true },
+                            }
+                        }
+                    });
+                }
+            }
+        })();
+    </script>
+<script>
+const rounds = [
+  { divider: "今天",
+    left: "同学你好，看你主页发的日常短视频镜头感特别好，我们公司专门做大学生素人孵化，不用露脸、不用才艺，课余每天直播2小时就行，保底月薪5000块，按时发工资，不会拖欠！",
+    right: "听起来很不错，我想了解一下" },
+  { left: "没问题。我们不收任何培训费，公司给你补贴3000元，算作你的签约费，设备采购费，手机、补光灯、支架全都给你配齐；还有一对一编导全程带拍，脚本、流量投放全公司包，零成本做博主。",
+    right: "那挺划算的，我愿意试试" },
+  { divider: "几天后",
+    left: "好。咱们走正规流程，需要签一份《方片传媒达人独家经纪合作协议》，只是约束你独家在我们平台更新内容，不会限制你上课、寒暑假休息，完全不耽误学业。",
+    right: "好的，签合同没问题" },
+  { left: "合同我线上发你，你打印签字拍照片回传给我就行，一式两份都先寄到我这边哈，公司统一寄去深圳总部盖章备案，盖完章再把属于你的那份寄回给你，流程都是这样的。",
+    right: "行，我马上把两份合同寄给你" },
+  { divider: "一个月后",
+    left: "后台统计你这个月直播有效时长不达标，每月都没完成协议约定的播出时长，属于单方面违约。",
+    right: "时长我尽力挤时间都播够了，怎么会不满足有效时长？" },
+  { left: "协议里白纸黑字写得很清楚，你本月未完成月度最低有效直播时长，构成单方面违约。按照合约约定，你需要赔付共计20万元，包含前期公司为你垫付的设备采买成本、一对一编导孵化全程培训费、后续维权产生的全部法律服务费，同时还要三倍赔付我方三年预期收益损失，这几项加总合计20万元，没有协商减免的空间。",
+    right: "我要查看属于我的那份合同核对条款！" },
+  { left: "之前两份合同全都送去总部存档了，现在暂时调不出来原件。而且合同里违约金条款白纸黑字写死，我们已经委托律师准备起诉，下周法院传票会寄给你。",
+    right: "我还是学生，怎么拿出这么一大笔钱…" }
+];
+const DANGER_FROM = 6;
+const gameSection = document.getElementById('game');
+const gStages = {
+  intro: document.getElementById('g-intro'),
+  chat:  document.getElementById('g-chat')
+};
+const gTextArea  = document.getElementById('gTextArea');
+const gReplyArea = document.getElementById('gReplyArea');
+const gReplyBtn  = document.getElementById('gReplyBtn');
+const gChatHint  = document.getElementById('gChatHint');
+let gStage = 'intro', round = 0, busy = false, awaitingContinue = false;
+
+function gShow(name){
+  Object.values(gStages).forEach(s => s.classList.remove('active'));
+  gStages[name].classList.add('active');
+  gStage = name;
+}
+function addDivider(text){
+  const d = document.createElement('div');
+  d.className = 'g-divider';
+  d.textContent = text;
+  gTextArea.appendChild(d);
+}
+function addLeft(text, danger){
+  const d = document.createElement('div');
+  d.className = 'g-left' + (danger ? ' danger' : '');
+  d.textContent = text;
+  gTextArea.appendChild(d);
+}
+function addRight(text){
+  const d = document.createElement('div');
+  d.className = 'g-right';
+  d.textContent = text;
+  gTextArea.appendChild(d);
+}
+function addTyping(){
+  const d = document.createElement('div');
+  d.className = 'g-typing';
+  d.textContent = '……';
+  gTextArea.appendChild(d);
+  return d;
+}
+function presentRound(){
+  busy = true;
+  gTextArea.innerHTML = '';
+  gReplyArea.style.visibility = 'hidden';
+  const r = rounds[round - 1];
+  const danger = round >= DANGER_FROM;
+  gameSection.classList.toggle('danger', danger);
+  if(r.divider) addDivider(r.divider);
+  const t = addTyping();
+  setTimeout(() => {
+    t.remove();
+    addLeft(r.left, danger);
+    gReplyBtn.textContent = r.right;
+    gReplyArea.style.visibility = 'visible';
+    busy = false;
+  }, danger ? 1400 : 900);
+}
+function advanceChat(){
+  if(busy) return;
+  busy = true;
+  if(awaitingContinue){
+    awaitingContinue = false;
+    if(round >= rounds.length){ document.getElementById('news').scrollIntoView({behavior:'smooth'}); return; }
+    round++;
+    presentRound();
+    return;
+  }
+  const r = rounds[round - 1];
+  gReplyArea.style.visibility = 'hidden';
+  addRight(r.right);
+  awaitingContinue = true;
+  setTimeout(() => {
+    gReplyBtn.textContent = '继续';
+    gReplyArea.style.visibility = 'visible';
+    busy = false;
+  }, 600);
+}
+/* 封面页：点击跳转到互动体验 */
+document.getElementById('cover').addEventListener('click', () => {
+  document.getElementById('game').scrollIntoView({behavior:'smooth'});
+});
+gameSection.addEventListener('click', () => {
+  if(busy) return;
+  if(gStage === 'intro'){
+    gShow('chat');
+    gChatHint.style.display = 'block';
+    round = 1;
+    presentRound();
+  }
+});
+gReplyBtn.addEventListener('click', e => {
+  e.stopPropagation();
+  advanceChat();
+});
+</script>
+<!-- ====== 新闻报道正文 ====== -->
+<!-- ★ 全局正文字号：修改下面 font-size 即可调整全文大小，当前 17px -->
+<article id="sec-article" class="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8" style="font-family:'Source Serif SC','Noto Serif SC',Georgia,serif;color:#2d3748;line-height:2;font-size:24px;">
+  <h2 id="sec-intro" style="font-size:2rem;font-weight:1000;color:#1a1a2e;margin-bottom:32px;letter-spacing:-.02em;"></h2>
+  <p>游戏落幕，屏幕熄灭。</p>
+  <p>此刻回头审视这场步步推进的虚拟签约，你或许会真切感受到一种猝不及防的失重与慌乱：明明只是抱着课余兼职、尝试自媒体的简单初衷，全程顺从沟通、信任对方承诺、配合流程签约，从未主动违约、从未恶意跑路，最终却莫名被扣上"违约"的帽子，骤然背负起数十万元的天价赔偿债务。</p>
+  <p>一头雾水的错愕、无力辩驳的委屈、年少负债的恐慌、无路可退的焦虑……<strong>这并非虚拟设定，也不是个例，而是来自近年来无数大学生、青年内容创作者签约MCN机构的真实经历。</strong></p>
+  <p>我们从MCN机构评估最具未来发展潜力的社交媒体平台小红书中携带<span style="background:#8EB5DC;padding:2px 4px;"><strong>#MCN解约纠纷#</strong></span>标签的帖文中抽取了637条非重复帖文。</p>
+  <div class="chart-fade" style="display:flex;gap:24px;justify-content:center;margin:32px 0;flex-wrap:wrap;">\n    <iframe src="https://dycharts.com/xshow/index.html?id=c_00b99eccdec23e3c997d0545b27bcba6" width="470" height="320" scrolling="no" frameborder="0" style="border:none;border-radius:8px;"></iframe>
+    <iframe src="https://dycharts.com/xshow/index.html?id=c_4c623f579ba235f3fad78414ef20a712" width="500" height="320" scrolling="no" frameborder="0" style="border:none;border-radius:8px;"></iframe>
+  </div>
+    
+  <p>经过模型的分析与评估，我们发现小红书平台对于MCN解约纠纷的话题讨论聚焦在<span style="background:#8EB5DC;padding:2px 4px;"><strong>3个主题</strong></span>：</p>
+  <div class="chart-fade" style="display:flex;gap:24px;justify-content:center;margin:32px 0;flex-wrap:wrap;">\n    <iframe src="https://dycharts.com/xshow/index.html?id=c_34f93706b66eb75c544b476a07be0969" width="360" height="310" scrolling="no" frameborder="0" style="border:none;border-radius:8px;"></iframe>
+    <iframe src="https://dycharts.com/xshow/index.html?id=c_44826b4b2a1cb8b772ff21941ebd8552" width="360" height="310" scrolling="no" frameborder="0" style="border:none;border-radius:8px;"></iframe>
+    <iframe src="https://dycharts.com/xshow/index.html?id=c_204f0318a981cca81fe0c48cb00ed317" width="360" height="310" scrolling="no" frameborder="0" style="border:none;border-radius:8px;"></iframe>
+  </div>
+   <p><strong>"合同与违约金纠纷"是争议焦点。</strong>在短视频兼职常态化的当下，大量涉世未深的青年群体，频繁被MCN机构<span style="background:#8EB5DC;padding:2px 4px;"><strong>"零门槛、保底高薪、免费孵化、一对一扶持"</strong></span>的温柔话术精准吸引。从被主动搭讪、被刻意肯定，到对自媒体副业抱有期待，再到顺利签约、满心憧憬开启新尝试，沉浸在"低成本增收、被专业培养"的美好想象中。</p>
+  <p>可流程走完后，所有口头承诺尽数落空——<strong>所谓的专业孵化沦为无人问津的放养，所谓的流量扶持全然不见踪影，取而代之的是强制推送的三无广告、无底线的内容要求、严苛到脱离学生身份的工作指标。</strong>学业压力与签约任务双向挤压，精神内耗与数据焦虑持续叠加，当不堪重负的年轻人想要抽身解约、回归正常生活时，却猛然发现早已落入精心设计的陷阱。</p>
+<br><br><br>
+  <img id="sec-promise" class="chart-fade" src="口头画饼.PNG" alt="口头画饼与纸面枷锁" style="display:block;max-width:100%;margin:32px auto;">
+  <p>北京盈科律师事务所朱晨飞律师指出，MCN机构常借合同文本玩"文字游戏"，利用高额签约费和低门槛吸引签约，再通过无法完成的考核制造违约，从中获利。<span style="background:#8EB5DC;padding:2px 4px;"><strong>在北京致诚律师事务所655起合同违约案件中，主播因违约被MCN公司起诉的案件占比高达99.5%。</strong></span></p>
+
+  <h3 style="font-size:24px;font-weight:700;color:#1a1a2e;margin:32px 0 12px;">口头承诺与书面合同背离</h3>
+  <p>在签约过程中先以诱人的口头承诺促成签约，再以书面合同条款锁定对方义务。这种策略贯穿于签约前、签约时及签约后三个阶段性环节。</p>
+  <p data-char="zy">签约前是<strong>充满诱惑的口头承诺</strong>。"您好，我们是一家MCN公司，做素人精品IP孵化……无直播、不收费，公司一对一服务从零打造全包。"大学生郑妍在短视频平台收到这样一条私信。面对"拍不好、不会直播"的担心，对方承诺"不用直播，我们是专门打造素人的""如果效果不好只需要把公司提供的账号归还即可"。</p>
+  <p data-char="zy">签约时，郑妍却发现，书面条款的内容与缔约前双方沟通过程中的意思存在根本差异——合同明确规定主播每月直播不少于24日、每日不少于3小时。公司方以<span style="background:#8EB5DC;padding:2px 4px;"><strong>"合同只是一个模板，没有实质性作用"</strong></span>为由予以回应。而郑妍，在不充分了解条款法律效力的情况下完成了签署。</p>
+  <p>此外，据多名当事人反映，机构承诺的"保底薪资"于签约时或未载入书面合同，或虽载入但于合同履行阶段被公司以<span style="background:#8EB5DC;padding:2px 4px;"><strong>直播时长不足、配合度不符合要求、未完成关键绩效指标等事由克扣或拒绝支付。</strong></span></p>
+  <div style="display:flex;gap:28px;align-items:flex-start;margin:16px 0;">
+    <p style="flex:1;margin:0;padding-top:41px;">然而签约后，MCN却依据<strong>有利己方</strong>的书面条款主张权利。同时，在诉讼程序中，MCN公司可依据书面合同条款主张其权利，而事前的口头承诺，往往<strong>缺乏证据，无法举证。</strong>大学生群体普遍缺乏<strong>证据保全意识，口头沟通记录没有以书面证据形式保全。</strong></p>
+    <div style="flex:1;background:#E8F2F1;padding:20px 24px;border-radius:16px;">
+      <p style="margin:0;">依据《中华人民共和国民法典》第四百六十九条及《最高人民法院关于民事诉讼证据的若干规定》的相关规定，口头意思表示虽不排除其法律效力，但在诉讼中，主张该意思表示存在的一方须承担举证责任，并以证据能够达到高度盖然性之证明标准为必要。</p>
+    </div>
+  </div>
+
+  <h3 id="sec-balance" style="font-size:24px;font-weight:700;color:#1a1a2e;margin:32px 0 12px;">权利与义务严重失衡</h3>
+  <p>MCN合同最直观的问题，是合同条款本身的权利义务不对等。</p>
+  <p data-char="xd">2026年初，大学生小蝶与某MCN公司签订合同，履行期间，公司对小蝶实施严格管控，每日强制直播7小时，请假扣薪，直播脚本由公司统一制定，这完全具备劳动关系典型的<span style="background:#8EB5DC;padding:2px 4px;"><strong>从属性特征</strong></span>——<strong>包括人格从属性、经济从属性与组织从属性，</strong><span style="background:#8EB5DC;padding:2px 4px;"><strong>已构成实质劳动关系</strong></span>，然而小蝶所签署的名为<strong>《演绎经纪合同》</strong>，这意味着公司<strong>规避劳动关系本应履行的雇主义务。</strong>当小蝶因身体不适离职，公司依据合同索赔五万元——<strong>一方有天价违约金，而另外一方没有限制</strong>，这属于典型的"霸王条款"。</p>
+  <p data-char="zy">同时，主播在合同履行中的实体权利往往缺失。郑妍签署的合同仅<span style="background:#8EB5DC;padding:2px 4px;"><strong>模糊约定"符合甲方直播内容要求的直播时长，方可确认为有效直播时长"</strong></span>，<strong>但直播内容的要求缺乏具体细则，直播内容合格的评判权掌握在公司手中。</strong>这种合同使对方当事人的合同义务<strong>处于不确定状态，实质性地排除了主播在合同履行中的主要权利。</strong></p>
+
+  <h3 id="sec-labor" style="font-size:24px;font-weight:700;color:#1a1a2e;margin:32px 0 12px;">劳动关系认定的规避</h3>
+  <div style="background:#E8F2F1;padding:24px 28px;border-radius:16px;margin:24px 0;">
+  <p>合同怎么定性，决定了纠纷走哪条法律程序。如果被认定为劳动关系，则适用劳动法的保护；如果被认定为合作关系，则适用民法典，MCN可以依据合同条款索要违约金。后者对内容创作者们天然不利。因此，大部分合同载明"双方仅为合作关系，不涉及劳动关系、雇佣关系"的条款。把本可能构成劳动关系的用工形式包装成民事合作，以此绕开劳动法的约束。</p>
+  </div>
+
+  <p>据北京市致诚律师事务所数字法治研究与服务中心研究，在254件涉及网络主播与MCN公司法律关系认定的案件中，合同纠纷案件共138件，人民法院采纳主播关于双方存在事实劳动关系抗辩意见的仅11件，占比8%；劳动争议案件共116件，人民法院判决认定双方存在劳动关系的共57件，占比近50%。在裁判趋势方面，自2019年至2024年，劳动争议案件中法院确认劳动关系的比例稳定在45%至60%之间，无明显趋势变化。大量主播在司法程序中被划归为"合作关系"，MCN机构无须依照《中华人民共和国劳动合同法》的规定为主播缴纳社会保险，亦不受最低工资标准、工作时间上限、加班费支付等劳动规范的约束。近半数的主播无法获得劳动者身份的保护，这进一步固化了主播群体的弱势地位。</p>
+ 
+  <img id="sec-business" class="chart-fade" src="MCN的生意经.PNG" alt="MCN的生意经" style="display:block;max-width:100%;margin:32px auto;">
+  <p>过去十年MCN行业经历了高速发展，<strong>机构总量从2015年的160家增至2025年的近3万家，增长超过180倍，市场规模达636亿元。</strong></p>
+  <div class="chart-fade" style="display:flex;justify-content:center;margin:32px 0;">\n    <iframe src="https://dycharts.com/xshow/index.html?id=c_64a7cc1025866b9aa58501fe85533524" width="600" height="510" scrolling="no" frameborder="0" style="border:none;border-radius:8px;"></iframe>
+  </div>
+  <p>但与扩张的市场规模相反的是，2025年，百人以上MCN机构占比缩小了<strong>9%</strong>，200人以上大型机构仅<strong>占12%，而小微团队数量却增长14%</strong>。新注册的机构，<span style="background:#8EB5DC;padding:2px 4px;"><strong>超4成都将团队规模控制在30人以内</strong></span>。</p>
+  <div style="display:flex;gap:24px;justify-content:center;margin:32px 0;flex-wrap:wrap;">
+    <img class="chart-fade" src="组织规模分布.png" alt="组织规模分布" style="max-width:48%;border-radius:8px;">
+    <img class="chart-fade" src="组织结构关系.png" alt="组织结构关系" style="max-width:48%;border-radius:8px;">
+  </div>  
+  <p><strong>与运营团队不断收缩对应的，是持续扩张的账号规模。</strong>2025年，<strong>95%</strong>的MCN机构选择扩大孵化账号规模，同比<strong>增长15%，92%</strong>选择扩大签约账号规模，同比<strong>增长4%</strong>。运营账号规模<strong>500人以上</strong>机构占比显著提升。</p>
+
+  <div class="chart-fade" style="display:flex;gap:120px;justify-content:center;margin:32px 0 16px;flex-wrap:wrap;">\n    <iframe src="https://dycharts.com/xshow/index.html?id=c_2d89b8961d2bd350a04f8022bd25cbb0" width="430" height="300" scrolling="no" frameborder="0" style="border:none;border-radius:8px;"></iframe>
+    <iframe src="https://dycharts.com/xshow/index.html?id=c_d133ab7791849b738f0c9110aa6043e4" width="430" height="300" scrolling="no" frameborder="0" style="border:none;border-radius:8px;"></iframe>
+  </div>
+  <div style="display:flex;justify-content:center;margin:0 0 32px;">
+    <img class="chart-fade" src="孵化规模双柱图.png" alt="孵化规模双柱图" style="max-width:430px;border-radius:8px;">
+  </div>
+  <p>专业的MCN机构本应极大地助益内容创作者们，无论是账号运营，内容制作，拍摄指导，资源资金支持、商单变现支持等各个维度。这正是MCN机构存在的意义。然而，小微型MCN公司，流量资源稀缺、内容运营能力匮乏、商业变现渠道狭窄，无专业运营团队、无流量投放预算、无成熟孵化体系，<strong>何以兑现签约前"一对一孵化、专业培训、流量扶持"的宣传承诺？</strong></p>
+  <p>相似的遭遇在社交媒体上随处可见：大量小微MCN签约学生网红后，不提供脚本指导、不进行流量投放、不配备运营对接、不兑现设备补贴与保底薪资，放任博主自主摸索创作，此前承诺的全部为<strong>空口话术</strong>。</p>
+  <br>
+  <p><strong>广撒网，全放养，</strong>如若内容创作者走红，与机构签订合约所获的分红则属于机构纯收益，若未走红，提出解约则进入索赔收割流程，稳赚不赔。</p>
+  <p>"只需拿到营业执照就能开MCN机构，经营成本和违规成本都很低，如果一个机构开办不下去，再重新注册一家就可以了。通过企业信息查询平台很难查出来这类机构的风险信息。"湖南商管律师事务所律师李炎在接受央视新闻采访时指出。</p>
+  <p>在2020—2024年间，新注册的MCN机构中，仅约<strong>31.8%</strong>能够<strong>连续稳定经营超过3年，超过68%的机构在3年内注销、吊销或停业</strong>。</p>
+  <img class="chart-fade" src="机构成立年限占比.png" alt="机构成立年限占比" style="display:block;max-width:50%;margin:32px auto;">
+  <br>  <br>
+  <p data-char="ll xw">在司法实践中，制造合同陷阱，索取高额违约金是普遍现象。罗莉签约后因直播时长要求陷入困境，斗鱼方面先以律师函索赔8000万元，后于仲裁申请中主张600万元。而罗莉<strong>实际直播收益远少于索赔金额。</strong>合同约定的违约金数额与实际收益之间的<strong>严重失衡，</strong>MCN机构主张的违约金时常为主播<strong>实际收益的数倍乃至数百倍。</strong>黑龙江省哈尔滨市中级人民法院审理的一起诉讼中，MCN公司上诉主张违约金149452元及律师费20000元，<strong>其名目五花八门，包括预期收益损失、运营人员工资成本、场地租赁费及甚至装修费分摊等。</strong>而当事人小王签约四个月，仅收益6025.70元。在网红与MCN公司合同纠纷中，以网络主播为主的违约方认为<strong>守约方主张的违约金过高，继而提出抗辩或反诉是最主要的争议类别，</strong>在致诚律师事务所的<span style="background:#8EB5DC;padding:2px 4px;"><strong>954起案例中占比高达68.3%</strong></span>，其中违约金最高者达<span style="background:#8EB5DC;padding:2px 4px;"><strong>4900万</strong></span>。</p>
+   <br>
+  <p>2024年12月，央视新闻报道，一些MCN机构的盈利模式为<strong>低价签约，严苛执行，最后高价索赔。</strong>作为虎牙直播平台的"钻石公会"，随风传媒及其关联公司在2021年底至2023年6月的<strong>一年半</strong>里于广州仲裁委员会向<span style="background:#8EB5DC;padding:2px 4px;"><strong>18名</strong></span><strong>主播索赔。</strong>业内专家指出，瞄准法律意识薄弱，急于求成的青年群体，利用高额违约金牟利，这几乎成为尾部小规模MCN主要收入来源。</p>
+ 
+  <img id="sec-victim" class="chart-fade" src="谁在买单.PNG" alt="谁在买单" style="display:block;max-width:100%;margin:32px auto;">
+  <!-- 人物案例栏 -->
+  <div class="char-bar">
+    <div class="char-item" data-char="wyl"><img src="温悦琳.PNG" alt="温悦琳" style="width:100%;height:100%;border-radius:50%;object-fit:cover;">
+      <div class="char-tip"><strong>温悦琳 · 大四考研学生</strong>签约公会仅收到3000元首笔签约金，公会单方面提高考核标准并拒付余款；因调整直播时间备考被诉违约，仲裁败诉需赔偿4.7万元，而全年直播收入不足500元。</div>
+    </div>
+    <div class="char-item" data-char="ll"><img src="罗莉.PNG" alt="罗莉" style="width:100%;height:100%;border-radius:50%;object-fit:cover;">
+      <div class="char-tip"><strong>罗莉 · 985高校表演系大二</strong>签约斗鱼关联公会，因全日制学业无法完成每月180小时直播要求，停播后被索赔600万元；仲裁裁决最终赔偿2万元违约金。</div>
+    </div>
+    <div class="char-item" data-char="zy"><img src="郑妍.PNG" alt="郑妍" style="width:100%;height:100%;border-radius:50%;object-fit:cover;">
+      <div class="char-tip"><strong>郑妍 · 在校大学生</strong>被MCN以"免费打造素人、无需直播"为诱饵签约，公司违约后却要求直播并虚报高额费用，拒绝后被诉索赔26万余元；法院审理后公司撤诉，证据移送公安机关。</div>
+    </div>
+    <div class="char-item" data-char="xd"><img src="小蝶.PNG" alt="小蝶" style="width:100%;height:100%;border-radius:50%;object-fit:cover;">
+      <div class="char-tip"><strong>小蝶 · 在校大学生主播</strong>公司每日强制直播不少于7小时、实施严格考勤；因身体不适离职被索赔5万元。法院认定具备劳动关系从属性特征，公司最终放弃违约金诉求。</div>
+    </div>
+    <div class="char-item" data-char="xw"><img src="小王.PNG" alt="小王" style="width:100%;height:100%;border-radius:50%;object-fit:cover;">
+      <div class="char-tip"><strong>小王 · 大学刚毕业主播</strong>因单方停播被MCN索赔169452元；法院认为预期收益不确定、运营成本与违约无直接关联，最终仅判赔15000元。</div>
+    </div>
+  </div>
+  <p><span style="background:#8EB5DC;padding:2px 4px;"><strong>机构设陷学生，而学生也并非"完美受害人"。</strong></span>他们对暗藏的陷阱毫无觉察，兼之法律意识薄弱，盲目签约甚至随意触发违约行为。江苏天淦律师事务所近3年承接北海仲裁委和广州仲裁委仲裁相关案件<strong>超200宗</strong>，北海仲裁委<strong>仅2宗裁决支持主播，广州仲裁委无一宗支持主播。</strong></p>
+  <p>在校大学生、未成年青年成为高频受害群体，其<span style="background:#8EB5DC;padding:2px 4px;"><strong>内在的脆弱性</strong></span>是沦为无良MCN机构收割目标的自身根源。</p>
+  <div style="display:flex;gap:32px;align-items:center;margin:24px 0;">
+    <p style="flex:1;margin:0;">受整体就业市场竞争压力影响，不少大学生深陷就业焦虑，迫切想要寻找一条低门槛、投资回报快的出路。中国青年报社联合杭州市各主管部门开展的直播行业青年调研显示，51.9%青年认为直播行业收入潜力大、<strong>3.9%青年迫于就业竞争压力</strong>而选择投身直播行业。面对机构打出的<strong>"零门槛兼职"、"五千元保底薪资"</strong>等宣传话术，学生群体极易丧失辨别能力。加之初出茅庐的学生自身难以承担前期拍摄设备购置、账号流量投放等成本，机构提出的<strong>"免费孵化"、"全程垫付资源"</strong>等承诺便轻易打消其戒备心理。</p>
+    <div style="flex-shrink:0;">
+      <img class="chart-fade" src="经济层面.jpg" alt="MCN机构发布的主播招聘信息" style="width:400px;border-radius:8px;box-shadow:0 2px 12px rgba(0,0,0,.08);display:block;">
+      <p style="margin:6px 0 0;font-size:13px;color:#8893a5;font-style:italic;text-align:center;">（图1-boss直聘软件中MCN机构发布的主播招聘信息）</p>
+    </div>
+  </div>
+  <div class="chart-fade" style="display:flex;gap:120px;justify-content:center;margin:32px 0;flex-wrap:wrap;">\n    <iframe src="https://dycharts.com/xshow/index.html?id=c_d70851d5d9ea7642d01326e889277d28" width="440" height="380" scrolling="no" frameborder="0" style="border:none;border-radius:8px;box-shadow:0 2px 12px rgba(0,0,0,.06);"></iframe>
+    <iframe src="https://dycharts.com/xshow/index.html?id=c_1e5dffa00c58b8b89d2d9c6c3d92f727" width="440" height="380" scrolling="no" frameborder="0" style="border:none;border-radius:8px;box-shadow:0 2px 12px rgba(0,0,0,.06);"></iframe>
+  </div>
+    
+  <p>大学生普遍缺少商事经纪相关法律知识储备，自身不具备辨别不平等合约条款的能力，签约阶段难以主动识别暗藏的约束陷阱，习惯轻信运营人员的口头承诺，不会仔细研读书面合同细则便草草签字。事后也不清楚可通过司法途径调整不合理违约金，法律维权能力存在明显短板。《法制日报》记者于2024年5月采访了曾为MCN机构提供法务咨询服务的刘昕，他表示<span style="background:#8EB5DC;padding:2px 4px;"><strong>所在公司每月要处理300至400起</strong></span>MCN机构与主播纠纷案，涉案人群里在校大学生十分集中，<span style="background:#8EB5DC;padding:2px 4px;"><strong>学生普遍缺少社会经验与法律意识，事前缺少风险研判，甚至随意违约，</strong></span>如停播、跳槽，送上门"被宰"，遭遇起诉后更是难以主动维护自身合法权益。</p>
+  <p><span style="background:#8EB5DC;padding:2px 4px;"><strong>大学生社会阅历浅薄、心理承压能力有限，</strong></span>学生完成签约后，机构常借口账号数据不佳，持续进行精神打压，不断放大学生自我怀疑，<strong>迫使学生接受高强度直播安排，甚至诱导参与触碰内容底线的直播行为。</strong>《新湖南》2026年5月报道的法院判例显示，00后主播小叶签约MCN机构后，便被强制安排深夜直播、接受不合理的工作要求，长期的身心双重压迫让其心理彻底崩溃，无奈单方面停播解约，落入MCN机构的索赔陷阱。</p>
+  <br> <br>
+  <p style="font-weight:700;text-indent:2em;"><span style="background:#8EB5DC;padding:0 4px;">MCN机构针对大学生的批量签约陷阱，早已不是个体纠纷，而是侵害青年权益、扰乱校园与网络生态的公共议题。</span></p>
+  <p>从个人层面看，MCN机构签约乱象会对在校大学生造成双重实质性伤害：长期直播挤占学习时间，极易造成学业停滞，同时直播行业存在的高强度流量考核机制给大学生带来巨大精神压力，就工作频率而言，<strong>43.2%的职业主播需要每日开播，其中单日直播时长达3小时以上占比77.2%，</strong>常态化高强度开播节奏不仅使学生主播难以平衡直播任务与学习安排，而且还会持续消耗大学生的身心健康。</p>
+  
+  <div class="chart-fade" style="display:flex;gap:120px;justify-content:center;margin:32px 0;flex-wrap:wrap;">\n    <iframe src="https://dycharts.com/xshow/index.html?id=c_a06904e29ee0c69c902f11180243c9f1" width="440" height="380" scrolling="no" frameborder="0" style="border:none;border-radius:8px;box-shadow:0 2px 12px rgba(0,0,0,.06);"></iframe>
+    <iframe src="https://dycharts.com/xshow/index.html?id=c_0762028ad784f1c1b4c50c8468575c7b" width="440" height="380" scrolling="no" frameborder="0" style="border:none;border-radius:8px;box-shadow:0 2px 12px rgba(0,0,0,.06);"></iframe>
+  </div>
+  
+  <p>网络暴力、恶意评论也会<strong>使其产生自我否定，甚至产生抑郁倾向。</strong>北美行业机构Creators4 Mental Health联合Lupiani Insights & Strategies对短视频、直播全职或兼职创作者进行的专项研究揭示：<strong>创作者的心理健康随着行业停留时间越长而恶化。</strong>工作五年及以上的人报告的职业倦怠率最高。在542名受访创作者中，<strong>65%表示他们痴迷于内容表现，58%表示当数据不佳时，他们的自我价值感会下降。10%的受访者表示，曾因工作产生过自杀念头，</strong>该比例是美国国家精神卫生研究所统计的全美成年人平均水平的<strong>两倍</strong>。</p>
+  <p>而暗藏霸王条款的失衡合约，一旦学生提出解约，不仅会让学生背负天价违约金、直接产生财产损失，机构还会以合同为依据持续对学生施压，形成身心与经济的双重侵害。</p>
+   <br>
+  <p data-char="wyl">在社会层面，乱象持续蔓延可能会催生<strong>恶劣传导效应</strong>：温悦琳当初被公会万元签约金吸引签约，仅拿到部分款项后，机构便以直播时长不足停发剩余报酬，还要求她介绍其他女生签约才可继续结算薪资。这类诱导拉新的套路极易在校园内部形成<strong>连环收割的传播链条</strong>；未成年人、大学生群体权益长期受损，会动摇青年对灵活就业、数字经济的信任；同时野蛮生长的灰色MCN机构<strong>针对学生群体持续扩张违规业务，助推低俗直播、虚假流量、商事欺诈等行业顽疾，破坏网红经济良性发展根基。</strong></p>
+<br><br><br>
+ 
+  <img id="sec-regulate" class="chart-fade" src="监管亮剑.PNG" alt="监管亮剑" style="display:block;max-width:100%;margin:32px auto;">
+  <p>尽管MCN合同陷阱重重，但"签约即必输"的局面并非不可改变。近两年来，司法裁判与行政监管形成合力，MCN行业生态正在逐步得到优化。</p>
+  <p>合同的约定不等于法律的认可。在司法实践中，法院并非简单地依据合同文本作出裁判，而是通过独立的司法审查，对合同条款的法律效力、违约金的合理性等问题作出实质判断。</p>
+  <p>据北京市致诚律师事务所基于近千份裁判文书的统计，在652件MCN索赔违约金的案件中，<strong>法院支持率达90.2%，判赔金额10万元以下的占54.1%，10万至50万元占25.3%，最高达4900万元。</strong></p>
+  <div class="chart-fade" style="display:flex;justify-content:center;margin:32px 0;">\n    <iframe src="https://dycharts.com/xshow/index.html?id=c_2a8ec7ba880e033afe4361cd9b8f75ec" width="500" height="420" scrolling="no" frameborder="0" style="border:none;border-radius:8px;"></iframe>
+  </div>
+  <p data-char="ll xw"><strong>MCN索赔获得支持的几率虽高，但法院在<span style="background:#8EB5DC;padding:0 2px;">84.9%</span>的案件中对违约金进行了削减。</strong>在斗鱼诉在校大学生罗莉案中，斗鱼索赔600万元，仲裁庭认为该金额与主播实际所得相比不合理，<strong>最终仅支持2万元，<span style="background:#8EB5DC;padding:2px 4px;">调减比例约99%</span></strong>。在小王违约金的众多名目中，法院认定，<strong>预期收益损失因直播收益不确定性不予支持</strong>；运营人员成本、场地租赁费、装修成本均为公司经营成本，<strong>与主播违约之间缺乏直接因果关系。</strong>综合考量小王大学刚毕业、直播经验尚浅等因素，酌定小王承担违约金10000元、律师费5000元。MCN原主张的169452元<strong>最终仅获支持15000元，<span style="background:#8EB5DC;padding:2px 4px;">调减比例约91%</span></strong>。<strong>可见，主播单方停播或提前解约，经法院审理认定构成违约的，应当依法承担违约责任。但法院审理时会充分考虑违约金是否过分高于MCN公司因违约所遭受的实际损失。</strong></p>
+   <br>
+  <p>然而，司法裁判终究是事后纠偏，难以覆盖行业生态中的系统性问题。从法律程序来看，大学生也未必天然占据道德高地，其违约行为在合同层面确实可能成立。行政监管应该及时介入，为这一新兴行业确立清晰的规则边界，压缩MCN机构利用信息不对称和法律程序实施不当牟利的空间，推动行业规范化运营。</p>
+  <!-- 云开见日：滚动交互画布 -->
+  <div id="cloud-reveal" style="height:34vh;position:relative;overflow:hidden;background:transparent;margin:0;">
+    <img id="cr-sun" src="sun.PNG" alt="太阳" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:1;width:320px;">
+    <!-- 云1：左上初始，最先向左散开 -->
+    <img class="cr-cloud" src="IMG_3358.PNG" alt="云1" data-start="0.000" data-end="0.143" data-ix="-80" data-iy="-60" data-fx="-900" data-fy="0" style="position:absolute;left:50%;top:50%;z-index:2;width:300px;">
+    <!-- 云2：右上初始，第二向右散开 -->
+    <img class="cr-cloud" src="IMG_3359.PNG" alt="云2" data-start="0.143" data-end="0.286" data-ix="60"  data-iy="-50" data-fx="900"  data-fy="0" style="position:absolute;left:50%;top:50%;z-index:2;width:300px;">
+    <!-- 云3：中左初始，第三向左散开 -->
+    <img class="cr-cloud" src="IMG_3360.PNG" alt="云3" data-start="0.286" data-end="0.429" data-ix="-100" data-iy="20"  data-fx="-900" data-fy="0" style="position:absolute;left:50%;top:50%;z-index:2;width:300px;">
+    <!-- 云4：中右初始，第四向右散开 -->
+    <img class="cr-cloud" src="IMG_3361.PNG" alt="云4" data-start="0.429" data-end="0.571" data-ix="80"  data-iy="10"  data-fx="900"  data-fy="0" style="position:absolute;left:50%;top:50%;z-index:2;width:300px;">
+    <!-- 云5：左下初始，第五向左散开 -->
+    <img class="cr-cloud" src="IMG_3362.PNG" alt="云5" data-start="0.571" data-end="0.714" data-ix="-70" data-iy="70"  data-fx="-900" data-fy="0" style="position:absolute;left:50%;top:50%;z-index:2;width:300px;">
+    <!-- 云6：右下初始，最后向右散开 -->
+    <img class="cr-cloud" src="IMG_3363.PNG" alt="云6" data-start="0.714" data-end="0.857" data-ix="50"  data-iy="60"  data-fx="900"  data-fy="0" style="position:absolute;left:50%;top:50%;z-index:2;width:300px;">
+  </div>
+  <p class="cr-text-line">2025年1月，国家网信办发布MCN管理规定草案稿。</p>
+  <p class="cr-text-line">  2025年10月，国家标准《网络表演经纪机构运营服务要求》获批，2026年2月实施，系国内首个网络表演经纪机构国标。</p>
+  <p class="cr-text-line">2025年12月，《直播电商监督管理办法》发布，2026年2月施行，明确MCN责任义务。2025年抖音协助3047名主播解除不规范合约，清退不良机构734家。</p>
+  <p class="cr-text-line">2025年"清朗"行动清退并禁止重新入驻MCN机构1300余家；全国网信系统关闭违规账号107802个。</p>
+  <p class="cr-text-line">2026年以来，抖音在"清朗·网络娱乐团播乱象整治"专项行动中处置团播违规3万人次，回收直播权限账号4025个，清退公会34家。</p>
+  <p class="cr-text-line">2026年5月，五部门联合公布《互联网信息内容多渠道分发服务管理规定》，2026年9月施行，要求MCN依法登记，平台显著展示账号所属机构。</p>
+  <p class="cr-text-line cr-text-line-sun">中央网信办部署"清朗"系列专项行动，2026年7月开展为期两个月的团播乱象整治，重点针对不当玩法诱导打赏、侵害未成年人权益、MCN管理失范等问题。</p>
+  <p>司法层面对MCN"以诉牟利"模式的否定日益鲜明。从草案征求意见到国标实施，从五部门立法到专项行动，行政监管正逐步为这一野蛮生长的行业划定边界。</p> 
+  <p>但是真正的改变，需要<strong>司法公正、监管有力、MCN经营有道与青年群体理智清醒</strong>四者合力完成。</p>
+
+
+   <br><br><br><br><br>
+  <div id="sec-ending" style="background:#FFE795;padding:28px 32px;border-radius:16px;margin:32px auto;max-width:75%;">
+  <p>合约不是枷锁，流量更不是人生捷径。行业监管为青年守住了法律底线；而真正能打破"必输困局"的，永远是年轻人放下一夜爆红的幻想，正视就业竞争、读懂合同、敬畏规则、理性看待数字红利。</p>
+  <p>但是，滤镜下掩盖的伤口，不单属于大学生网红，还属于新就业形态的参与者、属于互联网的冲浪者、属于每个在数字时代沉浮的个体。</p>
+  <p>我们期待每一位怀揣梦想的年轻人都能沉下心来，让热爱与努力真正成为前行的底气，而非沦为资本收割的筹码；我们期盼主播行业回归纯粹初心，让流量与价值双向奔赴共生，让网红经济行稳致远、向阳而生。</p>
+  </div>
+</article>
+
+<div style="text-align:center;padding:48px 24px 64px;color:#4a5568;line-height:2.2;font-size:17px;font-family:'Source Serif SC','Noto Serif SC',Georgia,serif;">
+  <p style="font-weight:700;font-size:19px;margin-bottom:16px;">制作团队</p>
+  <p>统筹：杨思萌</p>
+  <p>数据搜集与清洗：朱润达、杨思萌、周科妤、孙雪</p>
+  <p>撰文：杨思萌、周科妤、孙雪</p>
+  <p>数据可视化：孙雪、周科妤</p>
+  <p>网页制作：朱润达</p>
+  <p>美工：方卉</p>
+  <p style="margin-top:32px;font-weight:700;font-size:17px;margin-bottom:16px;">指导教师</p>
+  <p>霍顺老师</p>
+</div>
+
+<script>
+/* ===== 图表淡入动画 ===== */
+(function(){
+  const fadeObserver = new IntersectionObserver(function(entries){
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        entry.target.classList.add('visible');
+      }
+    });
+  }, {threshold: 0.15, rootMargin: '0px 0px -40px 0px'});
+  document.querySelectorAll('.chart-fade').forEach(el => fadeObserver.observe(el));
+})();
+
+/* 左侧导航：滚动高亮当前章节 */
+const navLinks = Array.from(document.querySelectorAll('#sideNav a'));
+const spySections = navLinks.map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+function navSpy(){
+  let current = null;
+  for(const sec of spySections){
+    if(sec.getBoundingClientRect().top <= window.innerHeight * 0.35) current = sec;
+  }
+  navLinks.forEach(a => a.classList.toggle('active', current && a.getAttribute('href') === '#' + current.id));
+}
+window.addEventListener('scroll', navSpy, {passive:true});
+navSpy();
+
+/* 人物栏：引入到达屏幕上方30%时弹出，之前不显示 */
+(function(){
+  const cb = document.querySelector('.char-bar');
+  const el = document.getElementById('sec-intro');
+  if(!cb || !el) return;
+  let done = false;
+  function check(){
+    if(done) return;
+    if(el.getBoundingClientRect().top < window.innerHeight * 0.3){
+      cb.classList.add('visible'); done = true;
+    }
+  }
+  window.addEventListener('scroll', check, {passive:true});
+  check(); // 初始加载时也检查一次
+})();
+
+/* ===== 段落悬浮联动人物栏高亮 ===== */
+(function(){
+  const charItems = document.querySelectorAll('.char-item[data-char]');
+  const charMap = {};
+  charItems.forEach(item => {
+    charMap[item.dataset.char] = item;
+  });
+  // 给带 data-char 的段落绑定悬浮事件
+  document.querySelectorAll('[data-char]').forEach(el => {
+    if(el.classList.contains('char-item')) return; // 跳过人物栏自身
+    el.addEventListener('mouseenter', function(){
+      const chars = this.dataset.char.split(' ');
+      chars.forEach(c => {
+        if(charMap[c]) charMap[c].classList.add('highlight');
+      });
+    });
+    el.addEventListener('mouseleave', function(){
+      const chars = this.dataset.char.split(' ');
+      chars.forEach(c => {
+        if(charMap[c]) charMap[c].classList.remove('highlight');
+      });
+    });
+  });
+})();
+
+/* ===== 云开见日：滚动驱动云层依次向左右散开（支持所有翻页方式） ===== */
+(function(){
+  const section = document.getElementById('cloud-reveal');
+  if(!section) return;
+  const clouds = Array.from(section.querySelectorAll('.cr-cloud'));
+  const textLines = Array.from(document.querySelectorAll('.cr-text-line'));
+  const sunLine = document.querySelector('.cr-text-line-sun');
+  let progress = 0;
+  const totalScroll = 2000;
+  const SUN_THRESHOLD = 6/7; // 云全部散开后，太阳行出现
+  let locking = false;
+
+  function getPinY(){
+    return section.offsetTop - window.innerHeight * 0.12;
+  }
+
+  function updateClouds(p){
+    clouds.forEach((c, i) => {
+      const start = parseFloat(c.dataset.start);
+      const end   = parseFloat(c.dataset.end);
+      const ix = parseFloat(c.dataset.ix);
+      const iy = parseFloat(c.dataset.iy);
+      const fx = parseFloat(c.dataset.fx);
+      const fy = parseFloat(c.dataset.fy);
+      const localP = Math.max(0, Math.min(1, (p - start) / (end - start)));
+      const cx = ix + localP * (fx - ix);
+      const cy = iy + localP * (fy - iy);
+      c.style.transform = `translate(calc(-50% + ${cx}px), calc(-50% + ${cy}px))`;
+      c.style.opacity = Math.max(0, 1 - localP * 1.3);
+    });
+    textLines.forEach((line, i) => {
+      if(i < clouds.length){
+        const end = parseFloat(clouds[i].dataset.end);
+        line.classList.toggle('visible', p >= end);
+      }
+    });
+    if(sunLine){
+      sunLine.classList.toggle('visible', p >= SUN_THRESHOLD);
+    }
+  }
+
+  updateClouds(0);
+
+  // 鼠标滚轮：精确控制（preventDefault 阻止页面滚动）
+  window.addEventListener('wheel', function(e){
+    if(locking) return;
+    const rect = section.getBoundingClientRect();
+    if(progress < 1 && rect.top <= window.innerHeight * 0.12 && rect.bottom > 0 && e.deltaY > 0){
+      e.preventDefault();
+      progress += e.deltaY / totalScroll;
+      if(progress > 1) progress = 1;
+      updateClouds(progress);
+      return;
+    }
+    if(progress > 0 && rect.top <= window.innerHeight * 0.12 && e.deltaY < 0){
+      e.preventDefault();
+      progress += e.deltaY / totalScroll;
+      if(progress < 0) progress = 0;
+      updateClouds(progress);
+    }
+  }, {passive: false});
+
+  // 通用滚动兜底：触控板、触摸屏、键盘、滚动条等
+  window.addEventListener('scroll', function(){
+    if(locking) return;
+    const pinY = getPinY();
+    const curY = window.scrollY;
+    // 向下翻页超出锚点 → 转为进度
+    if(progress < 1 && curY > pinY){
+      locking = true;
+      progress = Math.min(1, progress + (curY - pinY) / 800);
+      updateClouds(progress);
+      window.scrollTo(0, pinY);
+      requestAnimationFrame(function(){ locking = false; });
+      return;
+    }
+    // 向上翻页退回锚点以下 → 反向减少进度
+    if(progress > 0 && curY < pinY){
+      locking = true;
+      progress = Math.max(0, progress - (pinY - curY) / 800);
+      updateClouds(progress);
+      window.scrollTo(0, pinY);
+      requestAnimationFrame(function(){ locking = false; });
+    }
+  });
+})();
+</script>
+
+</body>
+</html>
+
