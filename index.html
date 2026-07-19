@@ -1,4 +1,4 @@
-﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿<!DOCTYPE html>
+﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
@@ -153,66 +153,53 @@ html{scroll-behavior:smooth;}
   font-size:14px; color:rgba(255,255,255,.25);
   animation:gBreath 1.8s ease-in-out infinite;
 }
-/* ===== 左侧导航栏 - 时间轴风格 ===== */
+/* ===== 左侧导航栏 - 规培生风格 ===== */
 #sideNav{
-  position:fixed; left:18px; top:50%; transform:translateY(-50%); z-index:60;
-  display:flex; flex-direction:column; gap:2px;
-  background:rgba(15,23,42,.82); backdrop-filter:blur(20px) saturate(200%);
-  -webkit-backdrop-filter:blur(20px) saturate(200%);
-  border:1px solid rgba(255,255,255,.1);
-  border-radius:16px; padding:18px 10px 18px 16px;
-  box-shadow:0 8px 32px rgba(0,0,0,.2);
+  position:fixed; left:30px; bottom:40px; z-index:60;
+  display:flex; flex-direction:column; gap:0;
   max-height:82vh; overflow-y:auto;
 }
-/* 左侧竖线 */
-#sideNav::before{
-  content:''; position:absolute; left:26px; top:28px; bottom:28px;
-  width:1px; background:rgba(255,255,255,.1);
+/* 竖线 + 进度填充 */
+#navProgressLine{
+  position:absolute; left:-14px; top:13px; bottom:13px;
+  width:1px; background:rgba(0,0,0,.1);
 }
-#sideNav a{
-  display:flex; align-items:center; gap:12px;
-  font-size:13px; color:rgba(255,255,255,.5);
-  text-decoration:none; padding:8px 14px 8px 4px; border-radius:10px;
-  white-space:nowrap; transition:all .3s cubic-bezier(.4,0,.2,1);
-  font-family:'Source Serif SC',"Noto Serif SC",Georgia,serif;
-  position:relative;
+#navProgressFill{
+  width:1px; background:#1a1a2e;
+  transition:height .3s ease;
 }
-/* 圆点 */
-#sideNav a::before{
-  content:''; flex-shrink:0;
+#sideNav .nav-item{
+  cursor:pointer; margin-bottom:18px; display:flex; align-items:center;
+  transition:opacity .35s, font-size .35s, color .35s;
+  font-size:13px; color:rgba(0,0,0,.45); opacity:.5;
+  font-family:'Source Serif SC','Noto Serif SC',Georgia,serif;
+}
+#sideNav .nav-item:last-child{ margin-bottom:0; }
+#sideNav .nav-item::before{
+  content:''; display:inline-block;
   width:8px; height:8px; border-radius:50%;
-  background:rgba(255,255,255,.15);
-  border:1.5px solid rgba(255,255,255,.25);
-  transition:all .3s cubic-bezier(.4,0,.2,1);
+  border:1.5px solid rgba(0,0,0,.25);
+  background:#e9f0f7; margin-right:10px; flex-shrink:0;
+  transition:all .35s ease;
 }
-#sideNav a:hover{
-  color:#fff; background:rgba(255,255,255,.06);
+#sideNav .nav-item.active,
+#sideNav .nav-item:hover{
+  font-size:16px; opacity:1; color:#1a1a2e;
 }
-#sideNav a:hover::before{
-  background:rgba(22,93,255,.5); border-color:rgba(22,93,255,.7);
-  box-shadow:0 0 10px rgba(22,93,255,.4);
-}
-#sideNav a.active{
-  color:#fff !important; font-weight:700;
-  background:linear-gradient(135deg, rgba(22,93,255,.25), rgba(114,46,209,.2)) !important;
-  padding-right:20px;
-}
-#sideNav a.active::before{
-  background:#fff; border-color:#165DFF;
-  box-shadow:0 0 14px rgba(22,93,255,.7), 0 0 4px rgba(22,93,255,.5);
-  width:10px; height:10px;
-}
-#sideNav a.active::after{
-  content:none; /* 去掉旧的左侧条 */
+#sideNav .nav-item.active::before,
+#sideNav .nav-item:hover::before{
+  background:#1a1a2e; border-color:#1a1a2e;
+  transform:scale(1.3); box-shadow:0 0 8px rgba(0,0,0,.15);
 }
 
 /* 小屏幕 */
 @media (max-width:860px){
-  #sideNav{ left:4px; border-radius:12px; padding:10px 4px 10px 8px; }
-  #sideNav::before{ left:16px; }
-  #sideNav a{ font-size:0; padding:8px 4px; gap:6px; justify-content:center; }
-  #sideNav a::before{ width:7px; height:7px; }
-  #sideNav a.active::before{ width:9px; height:9px; }
+  #sideNav{ left:6px; bottom:30px; }
+  #navProgressLine{ left:-8px; }
+  #sideNav .nav-item{ font-size:0; margin-bottom:12px; }
+  #sideNav .nav-item::before{ width:7px; height:7px; margin-right:0; }
+  #sideNav .nav-item.active,
+  #sideNav .nav-item:hover{ font-size:0; }
 }
 
 /* ===== 数据板块 - 编辑级设计 ===== */
@@ -360,6 +347,15 @@ html{scroll-behavior:smooth;}
   opacity:0; transition:opacity .8s ease;
 }
 .cr-text-line.visible{ opacity:1; }
+/* 云开见日容器内文字 */
+.cr-text-container{
+  pointer-events:none;
+}
+.cr-text-container .cr-text-line{
+  text-indent:2em; margin-bottom:.8em; color:#2d3748; line-height:2;
+  font-family:'Source Serif SC','Noto Serif SC',Georgia,serif;
+}
+.cr-text-container .cr-text-line.visible{ opacity:1; }
 /* 图表淡入动画 */
 .chart-fade{
   opacity:0; transform:translateY(24px);
@@ -403,12 +399,15 @@ html{scroll-behavior:smooth;}
     </button>
 </div>
 <nav id="sideNav">
-  <a href="#sec-intro">引言</a>
-  <a href="#sec-promise">口头画饼与纸面枷锁</a>
-  <a href="#sec-business">MCN的生意经</a>
-  <a href="#sec-victim">谁在买单？</a>
-  <a href="#sec-regulate">监管亮剑</a>
-  <a href="#sec-ending">尾声</a>
+  <div id="navProgressLine">
+    <div id="navProgressFill"></div>
+  </div>
+  <div class="nav-item active" data-section="sec-intro">引言</div>
+  <div class="nav-item" data-section="sec-promise">口头画饼与纸面枷锁</div>
+  <div class="nav-item" data-section="sec-business">MCN的生意经</div>
+  <div class="nav-item" data-section="sec-victim">谁在买单？</div>
+  <div class="nav-item" data-section="sec-regulate">监管亮剑</div>
+  <div class="nav-item" data-section="sec-ending">尾声</div>
 </nav>
 <script>
         // 回到顶部功能
@@ -998,8 +997,8 @@ gReplyBtn.addEventListener('click', e => {
   <p>游戏落幕，屏幕熄灭。</p>
   <p>此刻回头审视这场步步推进的虚拟签约，你或许会真切感受到一种猝不及防的失重与慌乱：明明只是抱着课余兼职、尝试自媒体的简单初衷，全程顺从沟通、信任对方承诺、配合流程签约，从未主动违约、从未恶意跑路，最终却莫名被扣上"违约"的帽子，骤然背负起数十万元的天价赔偿债务。</p>
   <p>一头雾水的错愕、无力辩驳的委屈、年少负债的恐慌、无路可退的焦虑……<strong>这并非虚拟设定，也不是个例，而是来自近年来无数大学生、青年内容创作者签约MCN机构的真实经历。</strong></p>
-  <p>我们从MCN机构评估最具未来发展潜力的社交媒体平台小红书中携带<span style="background:#8EB5DC;padding:2px 4px;"><strong>#MCN解约纠纷#</strong></span>标签的帖文中抽取了637条非重复帖文。</p>
-  <div class="chart-fade" style="display:flex;gap:24px;justify-content:center;margin:32px 0;flex-wrap:wrap;">\n    <iframe src="https://dycharts.com/xshow/index.html?id=c_00b99eccdec23e3c997d0545b27bcba6" width="470" height="320" scrolling="no" frameborder="0" style="border:none;border-radius:8px;"></iframe>
+  <p>我们从MCN机构评估最具未来发展潜力的社交媒体平台小红书中携带<span style="background:#8EB5DC;padding:2px 4px;"><strong>#MCN解约纠纷#</strong></span>标签的帖文中抽取了2637条非重复帖文。</p>
+  <div class="chart-fade" style="display:flex;gap:24px;justify-content:center;margin:32px 0;flex-wrap:wrap;">    <iframe src="https://dycharts.com/xshow/index.html?id=c_00b99eccdec23e3c997d0545b27bcba6" width="470" height="320" scrolling="no" frameborder="0" style="border:none;border-radius:8px;"></iframe>
     <iframe src="https://dycharts.com/xshow/index.html?id=c_4c623f579ba235f3fad78414ef20a712" width="500" height="320" scrolling="no" frameborder="0" style="border:none;border-radius:8px;"></iframe>
   </div>
     
@@ -1040,7 +1039,7 @@ gReplyBtn.addEventListener('click', e => {
  
   <img id="sec-business" class="chart-fade" src="MCN的生意经.PNG" alt="MCN的生意经" style="display:block;max-width:100%;margin:32px auto;">
   <p>过去十年MCN行业经历了高速发展，<strong>机构总量从2015年的160家增至2025年的近3万家，增长超过180倍，市场规模达636亿元。</strong></p>
-  <div class="chart-fade" style="display:flex;justify-content:center;margin:32px 0;">\n    <iframe src="https://dycharts.com/xshow/index.html?id=c_64a7cc1025866b9aa58501fe85533524" width="600" height="510" scrolling="no" frameborder="0" style="border:none;border-radius:8px;"></iframe>
+  <div class="chart-fade" style="display:flex;justify-content:center;margin:32px 0;">    <iframe src="https://dycharts.com/xshow/index.html?id=c_64a7cc1025866b9aa58501fe85533524" width="600" height="510" scrolling="no" frameborder="0" style="border:none;border-radius:8px;"></iframe>
   </div>
   <p>但与扩张的市场规模相反的是，2025年，百人以上MCN机构占比缩小了<strong>9%</strong>，200人以上大型机构仅<strong>占12%，而小微团队数量却增长14%</strong>。新注册的机构，<span style="background:#8EB5DC;padding:2px 4px;"><strong>超4成都将团队规模控制在30人以内</strong></span>。</p>
   <div style="display:flex;gap:24px;justify-content:center;margin:32px 0;flex-wrap:wrap;">
@@ -1049,7 +1048,7 @@ gReplyBtn.addEventListener('click', e => {
   </div>  
   <p><strong>与运营团队不断收缩对应的，是持续扩张的账号规模。</strong>2025年，<strong>95%</strong>的MCN机构选择扩大孵化账号规模，同比<strong>增长15%，92%</strong>选择扩大签约账号规模，同比<strong>增长4%</strong>。运营账号规模<strong>500人以上</strong>机构占比显著提升。</p>
 
-  <div class="chart-fade" style="display:flex;gap:120px;justify-content:center;margin:32px 0 16px;flex-wrap:wrap;">\n    <iframe src="https://dycharts.com/xshow/index.html?id=c_2d89b8961d2bd350a04f8022bd25cbb0" width="430" height="300" scrolling="no" frameborder="0" style="border:none;border-radius:8px;"></iframe>
+  <div class="chart-fade" style="display:flex;gap:120px;justify-content:center;margin:32px 0 16px;flex-wrap:wrap;">    <iframe src="https://dycharts.com/xshow/index.html?id=c_2d89b8961d2bd350a04f8022bd25cbb0" width="430" height="300" scrolling="no" frameborder="0" style="border:none;border-radius:8px;"></iframe>
     <iframe src="https://dycharts.com/xshow/index.html?id=c_d133ab7791849b738f0c9110aa6043e4" width="430" height="300" scrolling="no" frameborder="0" style="border:none;border-radius:8px;"></iframe>
   </div>
   <div style="display:flex;justify-content:center;margin:0 0 32px;">
@@ -1095,7 +1094,7 @@ gReplyBtn.addEventListener('click', e => {
       <p style="margin:6px 0 0;font-size:13px;color:#8893a5;font-style:italic;text-align:center;">（图1-boss直聘软件中MCN机构发布的主播招聘信息）</p>
     </div>
   </div>
-  <div class="chart-fade" style="display:flex;gap:120px;justify-content:center;margin:32px 0;flex-wrap:wrap;">\n    <iframe src="https://dycharts.com/xshow/index.html?id=c_d70851d5d9ea7642d01326e889277d28" width="440" height="380" scrolling="no" frameborder="0" style="border:none;border-radius:8px;box-shadow:0 2px 12px rgba(0,0,0,.06);"></iframe>
+  <div class="chart-fade" style="display:flex;gap:120px;justify-content:center;margin:32px 0;flex-wrap:wrap;">   <iframe src="https://dycharts.com/xshow/index.html?id=c_d70851d5d9ea7642d01326e889277d28" width="440" height="380" scrolling="no" frameborder="0" style="border:none;border-radius:8px;box-shadow:0 2px 12px rgba(0,0,0,.06);"></iframe>
     <iframe src="https://dycharts.com/xshow/index.html?id=c_1e5dffa00c58b8b89d2d9c6c3d92f727" width="440" height="380" scrolling="no" frameborder="0" style="border:none;border-radius:8px;box-shadow:0 2px 12px rgba(0,0,0,.06);"></iframe>
   </div>
     
@@ -1105,7 +1104,7 @@ gReplyBtn.addEventListener('click', e => {
   <p style="font-weight:700;text-indent:2em;"><span style="background:#8EB5DC;padding:0 4px;">MCN机构针对大学生的批量签约陷阱，早已不是个体纠纷，而是侵害青年权益、扰乱校园与网络生态的公共议题。</span></p>
   <p>从个人层面看，MCN机构签约乱象会对在校大学生造成双重实质性伤害：长期直播挤占学习时间，极易造成学业停滞，同时直播行业存在的高强度流量考核机制给大学生带来巨大精神压力，就工作频率而言，<strong>43.2%的职业主播需要每日开播，其中单日直播时长达3小时以上占比77.2%，</strong>常态化高强度开播节奏不仅使学生主播难以平衡直播任务与学习安排，而且还会持续消耗大学生的身心健康。</p>
   
-  <div class="chart-fade" style="display:flex;gap:120px;justify-content:center;margin:32px 0;flex-wrap:wrap;">\n    <iframe src="https://dycharts.com/xshow/index.html?id=c_a06904e29ee0c69c902f11180243c9f1" width="440" height="380" scrolling="no" frameborder="0" style="border:none;border-radius:8px;box-shadow:0 2px 12px rgba(0,0,0,.06);"></iframe>
+  <div class="chart-fade" style="display:flex;gap:120px;justify-content:center;margin:32px 0;flex-wrap:wrap;">    <iframe src="https://dycharts.com/xshow/index.html?id=c_a06904e29ee0c69c902f11180243c9f1" width="440" height="380" scrolling="no" frameborder="0" style="border:none;border-radius:8px;box-shadow:0 2px 12px rgba(0,0,0,.06);"></iframe>
     <iframe src="https://dycharts.com/xshow/index.html?id=c_0762028ad784f1c1b4c50c8468575c7b" width="440" height="380" scrolling="no" frameborder="0" style="border:none;border-radius:8px;box-shadow:0 2px 12px rgba(0,0,0,.06);"></iframe>
   </div>
   
@@ -1124,29 +1123,28 @@ gReplyBtn.addEventListener('click', e => {
   <p data-char="ll xw"><strong>MCN索赔获得支持的几率虽高，但法院在<span style="background:#8EB5DC;padding:0 2px;">84.9%</span>的案件中对违约金进行了削减。</strong>在斗鱼诉在校大学生罗莉案中，斗鱼索赔600万元，仲裁庭认为该金额与主播实际所得相比不合理，<strong>最终仅支持2万元，<span style="background:#8EB5DC;padding:2px 4px;">调减比例约99%</span></strong>。在小王违约金的众多名目中，法院认定，<strong>预期收益损失因直播收益不确定性不予支持</strong>；运营人员成本、场地租赁费、装修成本均为公司经营成本，<strong>与主播违约之间缺乏直接因果关系。</strong>综合考量小王大学刚毕业、直播经验尚浅等因素，酌定小王承担违约金10000元、律师费5000元。MCN原主张的169452元<strong>最终仅获支持15000元，<span style="background:#8EB5DC;padding:2px 4px;">调减比例约91%</span></strong>。<strong>可见，主播单方停播或提前解约，经法院审理认定构成违约的，应当依法承担违约责任。但法院审理时会充分考虑违约金是否过分高于MCN公司因违约所遭受的实际损失。</strong></p>
    <br>
   <p>然而，司法裁判终究是事后纠偏，难以覆盖行业生态中的系统性问题。从法律程序来看，大学生也未必天然占据道德高地，其违约行为在合同层面确实可能成立。行政监管应该及时介入，为这一新兴行业确立清晰的规则边界，压缩MCN机构利用信息不对称和法律程序实施不当牟利的空间，推动行业规范化运营。</p>
-  <!-- 云开见日：滚动交互画布 -->
-  <div id="cloud-reveal" style="height:34vh;position:relative;overflow:hidden;background:transparent;margin:0;">
-    <img id="cr-sun" src="sun.PNG" alt="太阳" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:1;width:320px;">
-    <!-- 云1：左上初始，最先向左散开 -->
-    <img class="cr-cloud" src="IMG_3358.PNG" alt="云1" data-start="0.000" data-end="0.143" data-ix="-80" data-iy="-60" data-fx="-900" data-fy="0" style="position:absolute;left:50%;top:50%;z-index:2;width:300px;">
-    <!-- 云2：右上初始，第二向右散开 -->
-    <img class="cr-cloud" src="IMG_3359.PNG" alt="云2" data-start="0.143" data-end="0.286" data-ix="60"  data-iy="-50" data-fx="900"  data-fy="0" style="position:absolute;left:50%;top:50%;z-index:2;width:300px;">
-    <!-- 云3：中左初始，第三向左散开 -->
-    <img class="cr-cloud" src="IMG_3360.PNG" alt="云3" data-start="0.286" data-end="0.429" data-ix="-100" data-iy="20"  data-fx="-900" data-fy="0" style="position:absolute;left:50%;top:50%;z-index:2;width:300px;">
-    <!-- 云4：中右初始，第四向右散开 -->
-    <img class="cr-cloud" src="IMG_3361.PNG" alt="云4" data-start="0.429" data-end="0.571" data-ix="80"  data-iy="10"  data-fx="900"  data-fy="0" style="position:absolute;left:50%;top:50%;z-index:2;width:300px;">
-    <!-- 云5：左下初始，第五向左散开 -->
-    <img class="cr-cloud" src="IMG_3362.PNG" alt="云5" data-start="0.571" data-end="0.714" data-ix="-70" data-iy="70"  data-fx="-900" data-fy="0" style="position:absolute;left:50%;top:50%;z-index:2;width:300px;">
-    <!-- 云6：右下初始，最后向右散开 -->
-    <img class="cr-cloud" src="IMG_3363.PNG" alt="云6" data-start="0.714" data-end="0.857" data-ix="50"  data-iy="60"  data-fx="900"  data-fy="0" style="position:absolute;left:50%;top:50%;z-index:2;width:300px;">
+  <!-- 云开见日：sticky 滚动驱动 -->
+  <div id="cloud-reveal-wrap" style="height:300vh;">
+    <div id="cloud-reveal" style="height:100vh;position:sticky;top:0;overflow:hidden;background:transparent;">
+      <img id="cr-sun" src="sun.PNG" alt="太阳" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:1;width:320px;">
+      <img class="cr-cloud" src="IMG_3358.PNG" alt="云1" data-start="0.000" data-end="0.143" data-ix="-80" data-iy="-60" data-fx="-900" data-fy="0" style="position:absolute;left:50%;top:50%;z-index:2;width:300px;">
+      <img class="cr-cloud" src="IMG_3359.PNG" alt="云2" data-start="0.143" data-end="0.286" data-ix="60"  data-iy="-50" data-fx="900"  data-fy="0" style="position:absolute;left:50%;top:50%;z-index:2;width:300px;">
+      <img class="cr-cloud" src="IMG_3360.PNG" alt="云3" data-start="0.286" data-end="0.429" data-ix="-100" data-iy="20"  data-fx="-900" data-fy="0" style="position:absolute;left:50%;top:50%;z-index:2;width:300px;">
+      <img class="cr-cloud" src="IMG_3361.PNG" alt="云4" data-start="0.429" data-end="0.571" data-ix="80"  data-iy="10"  data-fx="900"  data-fy="0" style="position:absolute;left:50%;top:50%;z-index:2;width:300px;">
+      <img class="cr-cloud" src="IMG_3362.PNG" alt="云5" data-start="0.571" data-end="0.714" data-ix="-70" data-iy="70"  data-fx="-900" data-fy="0" style="position:absolute;left:50%;top:50%;z-index:2;width:300px;">
+      <img class="cr-cloud" src="IMG_3363.PNG" alt="云6" data-start="0.714" data-end="0.857" data-ix="50"  data-iy="60"  data-fx="900"  data-fy="0" style="position:absolute;left:50%;top:50%;z-index:2;width:300px;">
+      <!-- 文字行：固定在容器底部，随进度渐显 -->
+      <div class="cr-text-container" style="position:absolute;bottom:6vh;left:0;right:0;max-width:1280px;margin:0 auto;padding:0 24px;z-index:3;">
+        <p class="cr-text-line">2025年1月，国家网信办发布MCN管理规定草案稿。</p>
+        <p class="cr-text-line">2025年10月，国家标准《网络表演经纪机构运营服务要求》获批，2026年2月实施，系国内首个网络表演经纪机构国标。</p>
+        <p class="cr-text-line">2025年12月，《直播电商监督管理办法》发布，2026年2月施行，明确MCN责任义务。2025年抖音协助3047名主播解除不规范合约，清退不良机构734家。</p>
+        <p class="cr-text-line">2025年"清朗"行动清退并禁止重新入驻MCN机构1300余家；全国网信系统关闭违规账号107802个。</p>
+        <p class="cr-text-line">2026年以来，抖音在"清朗·网络娱乐团播乱象整治"专项行动中处置团播违规3万人次，回收直播权限账号4025个，清退公会34家。</p>
+        <p class="cr-text-line">2026年5月，五部门联合公布《互联网信息内容多渠道分发服务管理规定》，2026年9月施行，要求MCN依法登记，平台显著展示账号所属机构。</p>
+        <p class="cr-text-line cr-text-line-sun">中央网信办部署"清朗"系列专项行动，2026年7月开展为期两个月的团播乱象整治，重点针对不当玩法诱导打赏、侵害未成年人权益、MCN管理失范等问题。</p>
+      </div>
+    </div>
   </div>
-  <p class="cr-text-line">2025年1月，国家网信办发布MCN管理规定草案稿。</p>
-  <p class="cr-text-line">  2025年10月，国家标准《网络表演经纪机构运营服务要求》获批，2026年2月实施，系国内首个网络表演经纪机构国标。</p>
-  <p class="cr-text-line">2025年12月，《直播电商监督管理办法》发布，2026年2月施行，明确MCN责任义务。2025年抖音协助3047名主播解除不规范合约，清退不良机构734家。</p>
-  <p class="cr-text-line">2025年"清朗"行动清退并禁止重新入驻MCN机构1300余家；全国网信系统关闭违规账号107802个。</p>
-  <p class="cr-text-line">2026年以来，抖音在"清朗·网络娱乐团播乱象整治"专项行动中处置团播违规3万人次，回收直播权限账号4025个，清退公会34家。</p>
-  <p class="cr-text-line">2026年5月，五部门联合公布《互联网信息内容多渠道分发服务管理规定》，2026年9月施行，要求MCN依法登记，平台显著展示账号所属机构。</p>
-  <p class="cr-text-line cr-text-line-sun">中央网信办部署"清朗"系列专项行动，2026年7月开展为期两个月的团播乱象整治，重点针对不当玩法诱导打赏、侵害未成年人权益、MCN管理失范等问题。</p>
   <p>司法层面对MCN"以诉牟利"模式的否定日益鲜明。从草案征求意见到国标实施，从五部门立法到专项行动，行政监管正逐步为这一野蛮生长的行业划定边界。</p> 
   <p>但是真正的改变，需要<strong>司法公正、监管有力、MCN经营有道与青年群体理智清醒</strong>四者合力完成。</p>
 
@@ -1184,18 +1182,40 @@ gReplyBtn.addEventListener('click', e => {
   document.querySelectorAll('.chart-fade').forEach(el => fadeObserver.observe(el));
 })();
 
-/* 左侧导航：滚动高亮当前章节 */
-const navLinks = Array.from(document.querySelectorAll('#sideNav a'));
-const spySections = navLinks.map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
-function navSpy(){
-  let current = null;
-  for(const sec of spySections){
-    if(sec.getBoundingClientRect().top <= window.innerHeight * 0.35) current = sec;
+/* 左侧导航：进度条 + 章节高亮 + 点击跳转 */
+(function(){
+  const navItems = document.querySelectorAll('#sideNav .nav-item');
+  const progressFill = document.getElementById('navProgressFill');
+  const sections = Array.from(navItems).map(item => document.getElementById(item.dataset.section)).filter(Boolean);
+  const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+
+  function updateNav(){
+    const scrollTop = window.scrollY;
+    // 进度条
+    if(progressFill && totalHeight > 0){
+      progressFill.style.height = (scrollTop / totalHeight * 100) + '%';
+    }
+    // 当前章节（从后往前找第一个顶部穿过视口中线的）
+    let current = sections.length - 1;
+    while(current >= 0){
+      if(sections[current].getBoundingClientRect().top <= window.innerHeight / 2) break;
+      current--;
+    }
+    navItems.forEach((item, i) => item.classList.toggle('active', i === current));
   }
-  navLinks.forEach(a => a.classList.toggle('active', current && a.getAttribute('href') === '#' + current.id));
-}
-window.addEventListener('scroll', navSpy, {passive:true});
-navSpy();
+
+  window.addEventListener('scroll', updateNav, {passive: true});
+
+  // 点击跳转
+  navItems.forEach(item => {
+    item.addEventListener('click', () => {
+      const sec = document.getElementById(item.dataset.section);
+      if(sec) window.scrollTo({top: sec.offsetTop, behavior: 'smooth'});
+    });
+  });
+
+  updateNav();
+})();
 
 /* 人物栏：引入到达屏幕上方30%时弹出，之前不显示 */
 (function(){
@@ -1238,23 +1258,20 @@ navSpy();
   });
 })();
 
-/* ===== 云开见日：滚动驱动云层依次向左右散开（支持所有翻页方式） ===== */
+/* ===== 云开见日：sticky + scroll 位置驱动 ===== */
 (function(){
+  const wrap = document.getElementById('cloud-reveal-wrap');
   const section = document.getElementById('cloud-reveal');
-  if(!section) return;
+  if(!wrap || !section) return;
   const clouds = Array.from(section.querySelectorAll('.cr-cloud'));
-  const textLines = Array.from(document.querySelectorAll('.cr-text-line'));
-  const sunLine = document.querySelector('.cr-text-line-sun');
-  let progress = 0;
-  const totalScroll = 2000;
-  const SUN_THRESHOLD = 6/7; // 云全部散开后，太阳行出现
-  let locking = false;
-
-  function getPinY(){
-    return section.offsetTop - window.innerHeight * 0.12;
-  }
+  const textLines = Array.from(section.querySelectorAll('.cr-text-line'));
+  const sunLine = section.querySelector('.cr-text-line-sun');
+  const SUN_THRESHOLD = 6/7;
+  let lastProgress = -1;
 
   function updateClouds(p){
+    if(p === lastProgress) return;
+    lastProgress = p;
     clouds.forEach((c, i) => {
       const start = parseFloat(c.dataset.start);
       const end   = parseFloat(c.dataset.end);
@@ -1274,55 +1291,19 @@ navSpy();
         line.classList.toggle('visible', p >= end);
       }
     });
-    if(sunLine){
-      sunLine.classList.toggle('visible', p >= SUN_THRESHOLD);
-    }
+    if(sunLine) sunLine.classList.toggle('visible', p >= SUN_THRESHOLD);
+  }
+
+  function onScroll(){
+    const wrapTop = wrap.offsetTop;
+    const scrollRange = wrap.offsetHeight - window.innerHeight;
+    if(scrollRange <= 0) return;
+    const p = Math.max(0, Math.min(1, (window.scrollY - wrapTop) / scrollRange));
+    updateClouds(p);
   }
 
   updateClouds(0);
-
-  // 鼠标滚轮：精确控制（preventDefault 阻止页面滚动）
-  window.addEventListener('wheel', function(e){
-    if(locking) return;
-    const rect = section.getBoundingClientRect();
-    if(progress < 1 && rect.top <= window.innerHeight * 0.12 && rect.bottom > 0 && e.deltaY > 0){
-      e.preventDefault();
-      progress += e.deltaY / totalScroll;
-      if(progress > 1) progress = 1;
-      updateClouds(progress);
-      return;
-    }
-    if(progress > 0 && rect.top <= window.innerHeight * 0.12 && e.deltaY < 0){
-      e.preventDefault();
-      progress += e.deltaY / totalScroll;
-      if(progress < 0) progress = 0;
-      updateClouds(progress);
-    }
-  }, {passive: false});
-
-  // 通用滚动兜底：触控板、触摸屏、键盘、滚动条等
-  window.addEventListener('scroll', function(){
-    if(locking) return;
-    const pinY = getPinY();
-    const curY = window.scrollY;
-    // 向下翻页超出锚点 → 转为进度
-    if(progress < 1 && curY > pinY){
-      locking = true;
-      progress = Math.min(1, progress + (curY - pinY) / 800);
-      updateClouds(progress);
-      window.scrollTo(0, pinY);
-      requestAnimationFrame(function(){ locking = false; });
-      return;
-    }
-    // 向上翻页退回锚点以下 → 反向减少进度
-    if(progress > 0 && curY < pinY){
-      locking = true;
-      progress = Math.max(0, progress - (pinY - curY) / 800);
-      updateClouds(progress);
-      window.scrollTo(0, pinY);
-      requestAnimationFrame(function(){ locking = false; });
-    }
-  });
+  window.addEventListener('scroll', onScroll, {passive: true});
 })();
 </script>
 
