@@ -1,4 +1,4 @@
-﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿<!DOCTYPE html>
+﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
@@ -48,6 +48,9 @@
             .card-hover:hover {
                 transform: translateY(-8px);
                 box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            }
+            .hover-reveal:hover img {
+                opacity: 1 !important;
             }
             .keyword-tag {
                 transition: all 0.2s ease;
@@ -376,7 +379,7 @@ html{scroll-behavior:smooth;}
     <div class="g-reply-area" id="gReplyArea" style="visibility:hidden">
       <span class="g-reply-btn" id="gReplyBtn"></span>
     </div>
-    <p id="gChatHint" style="display:none;animation:none;color:#7d93aa;font-size:14px;text-align:center;">你没有拒绝的选项</p>
+    <p id="gChatHint" style="display:none;animation:none;color:#7d93aa;font-size:14px;text-align:center;"></p>
   </div>
 </section>
 <div id="news" class="text-dark font-inter" style="background:#e9f0f7;">
@@ -883,7 +886,7 @@ const rounds = [
   { divider: "一个月后",
     left: "后台统计你这个月直播有效时长不达标，每月都没完成协议约定的播出时长，属于单方面违约。",
     right: "时长我尽力挤时间都播够了，怎么会不满足有效时长？" },
-  { left: "协议里白纸黑字写得很清楚，你本月未完成月度最低有效直播时长，构成单方面违约。按照合约约定，你需要赔付共计20万元，包含前期公司为你垫付的设备采买成本、一对一编导孵化全程培训费、后续维权产生的全部法律服务费，同时还要三倍赔付我方三年预期收益损失，这几项加总合计20万元，没有协商减免的空间。",
+  { left: "协议里白纸黑字写得很清楚，你本月未完成月度最低有效直播时长，构成单方面违约。按照合约约定，你需要赔付20万，包含前期公司为你垫付的设备采买成本、一对一编导孵化全程培训费、后续维权产生的全部法律服务费，同时还要三倍赔付我方三年预期收益损失，这几项加总合计20万元，没有协商减免的空间。",
     right: "我要查看属于我的那份合同核对条款！" },
   { left: "之前两份合同全都送去总部存档了，现在暂时调不出来原件。而且合同里违约金条款白纸黑字写死，我们已经委托律师准备起诉，下周法院传票会寄给你。",
     right: "我还是学生，怎么拿出这么一大笔钱…" }
@@ -998,9 +1001,19 @@ gReplyBtn.addEventListener('click', e => {
   </div>
     
   <p>经过模型的分析与评估，我们发现小红书平台对于MCN解约纠纷的话题讨论聚焦在<span style="background:#8EB5DC;padding:2px 4px;"><strong>3个主题</strong></span>：</p>
-  <div class="chart-fade" style="display:flex;gap:24px;justify-content:center;margin:32px 0;flex-wrap:wrap;">    <iframe src="https://dycharts.com/xshow/index.html?id=c_34f93706b66eb75c544b476a07be0969" width="360" height="310" scrolling="no" frameborder="0" style="border:none;border-radius:8px;"></iframe>
-    <iframe src="https://dycharts.com/xshow/index.html?id=c_44826b4b2a1cb8b772ff21941ebd8552" width="360" height="310" scrolling="no" frameborder="0" style="border:none;border-radius:8px;"></iframe>
-    <iframe src="https://dycharts.com/xshow/index.html?id=c_204f0318a981cca81fe0c48cb00ed317" width="360" height="310" scrolling="no" frameborder="0" style="border:none;border-radius:8px;"></iframe>
+  <div class="chart-fade" style="display:flex;gap:24px;justify-content:center;margin:32px 0;flex-wrap:wrap;">
+    <div class="hover-reveal" style="position:relative;width:360px;height:310px;">
+      <iframe src="https://dycharts.com/xshow/index.html?id=c_34f93706b66eb75c544b476a07be0969" width="360" height="310" scrolling="no" frameborder="0" style="border:none;border-radius:8px;"></iframe>
+      <img src="1.png" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:contain;opacity:0;transition:opacity 0.3s;pointer-events:none;border-radius:8px;background:#fff;">
+    </div>
+    <div class="hover-reveal" style="position:relative;width:360px;height:310px;">
+      <iframe src="https://dycharts.com/xshow/index.html?id=c_44826b4b2a1cb8b772ff21941ebd8552" width="360" height="310" scrolling="no" frameborder="0" style="border:none;border-radius:8px;"></iframe>
+      <img src="2.png" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:contain;opacity:0;transition:opacity 0.3s;pointer-events:none;border-radius:8px;background:#fff;">
+    </div>
+    <div class="hover-reveal" style="position:relative;width:360px;height:310px;">
+      <iframe src="https://dycharts.com/xshow/index.html?id=c_204f0318a981cca81fe0c48cb00ed317" width="360" height="310" scrolling="no" frameborder="0" style="border:none;border-radius:8px;"></iframe>
+      <img src="3.png" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:contain;opacity:0;transition:opacity 0.3s;pointer-events:none;border-radius:8px;background:#fff;">
+    </div>
   </div>
    <p><strong>"合同与违约金纠纷"是争议焦点。</strong>在短视频兼职常态化的当下，大量涉世未深的青年群体，频繁被MCN机构<span style="background:#8EB5DC;padding:2px 4px;"><strong>"零门槛、保底高薪、免费孵化、一对一扶持"</strong></span>的温柔话术精准吸引。从被主动搭讪、被刻意肯定，到对自媒体副业抱有期待，再到顺利签约、满心憧憬开启新尝试，沉浸在"低成本增收、被专业培养"的美好想象中。</p>
   <p>可流程走完后，所有口头承诺尽数落空——<strong>所谓的专业孵化沦为无人问津的放养，所谓的流量扶持全然不见踪影，取而代之的是强制推送的三无广告、无底线的内容要求、严苛到脱离学生身份的工作指标。</strong>学业压力与签约任务双向挤压，精神内耗与数据焦虑持续叠加，当不堪重负的年轻人想要抽身解约、回归正常生活时，却猛然发现早已落入精心设计的陷阱。</p>
@@ -1008,6 +1021,7 @@ gReplyBtn.addEventListener('click', e => {
   <img id="sec-promise" class="chart-fade" src="口头画饼.PNG" alt="口头画饼与纸面枷锁" style="display:block;max-width:100%;margin:32px auto;">
   <p>北京盈科律师事务所朱晨飞律师指出，MCN机构常借合同文本玩"文字游戏"，利用高额签约费和低门槛吸引签约，再通过无法完成的考核制造违约，从中获利。<span style="background:#8EB5DC;padding:2px 4px;"><strong>在北京致诚律师事务所655起合同违约案件中，主播因违约被MCN公司起诉的案件占比高达99.5%。</strong></span></p>
 
+  <br>
   <h3 style="font-size:24px;font-weight:700;color:#1a1a2e;margin:32px 0 12px;"><span style="background:#8EB5DC;padding:2px 8px;border-radius:4px;">口头承诺与书面合同背离</span></h3>
   <p>在签约过程中先以诱人的口头承诺促成签约，再以书面合同条款锁定对方义务。这种策略贯穿于签约前、签约时及签约后三个阶段性环节。</p>
   <p data-char="zy">签约前是<strong>充满诱惑的口头承诺</strong>。"您好，我们是一家MCN公司，做素人精品IP孵化……无直播、不收费，公司一对一服务从零打造全包。"大学生郑妍在短视频平台收到这样一条私信。面对"拍不好、不会直播"的担心，对方承诺"不用直播，我们是专门打造素人的""如果效果不好只需要把公司提供的账号归还即可"。</p>
@@ -1020,18 +1034,24 @@ gReplyBtn.addEventListener('click', e => {
     </div>
   </div>
 
+  <br>
   <h3 id="sec-balance" style="font-size:24px;font-weight:700;color:#1a1a2e;margin:32px 0 12px;"><span style="background:#8EB5DC;padding:2px 8px;border-radius:4px;">权利与义务严重失衡</span></h3>
   <p>MCN合同最直观的问题，是合同条款本身的权利义务不对等。</p>
   <p data-char="xd">2026年初，大学生小蝶与某MCN公司签订合同，履行期间，公司对小蝶实施严格管控，每日强制直播7小时，请假扣薪，直播脚本由公司统一制定，这完全具备劳动关系典型的<span style="background:#8EB5DC;padding:2px 4px;"><strong>从属性特征</strong></span>——<strong>包括人格从属性、经济从属性与组织从属性，</strong><span style="background:#8EB5DC;padding:2px 4px;"><strong>已构成实质劳动关系</strong></span>，然而小蝶所签署的名为<strong>《演绎经纪合同》</strong>，这意味着公司<strong>规避劳动关系本应履行的雇主义务。</strong>当小蝶因身体不适离职，公司依据合同索赔五万元——<strong>一方有天价违约金，而另外一方没有限制</strong>，这属于典型的"霸王条款"。</p>
   <p data-char="zy">同时，主播在合同履行中的实体权利往往缺失。郑妍签署的合同仅<span style="background:#8EB5DC;padding:2px 4px;"><strong>模糊约定"符合甲方直播内容要求的直播时长，方可确认为有效直播时长"</strong></span>，<strong>但直播内容的要求缺乏具体细则，直播内容合格的评判权掌握在公司手中。</strong>这种合同使对方当事人的合同义务<strong>处于不确定状态，实质性地排除了主播在合同履行中的主要权利。</strong></p>
 
+  <br>
   <h3 id="sec-labor" style="font-size:24px;font-weight:700;color:#1a1a2e;margin:32px 0 12px;"><span style="background:#8EB5DC;padding:2px 8px;border-radius:4px;">劳动关系认定的规避</span></h3>
   <div style="background:#E8F2F1;padding:24px 28px;border-radius:16px;margin:24px 0;">
   <p>合同怎么定性，决定了纠纷走哪条法律程序。如果被认定为劳动关系，则适用劳动法的保护；如果被认定为合作关系，则适用民法典，MCN可以依据合同条款索要违约金。后者对内容创作者们天然不利。因此，大部分合同载明"双方仅为合作关系，不涉及劳动关系、雇佣关系"的条款。把本可能构成劳动关系的用工形式包装成民事合作，以此绕开劳动法的约束。</p>
   </div>
 
-  <p>据北京市致诚律师事务所数字法治研究与服务中心研究，在254件涉及网络主播与MCN公司法律关系认定的案件中，合同纠纷案件共138件，人民法院采纳主播关于双方存在事实劳动关系抗辩意见的仅11件，占比8%；劳动争议案件共116件，人民法院判决认定双方存在劳动关系的共57件，占比近50%。在裁判趋势方面，自2019年至2024年，劳动争议案件中法院确认劳动关系的比例稳定在45%至60%之间，无明显趋势变化。大量主播在司法程序中被划归为"合作关系"，MCN机构无须依照《中华人民共和国劳动合同法》的规定为主播缴纳社会保险，亦不受最低工资标准、工作时间上限、加班费支付等劳动规范的约束。近半数的主播无法获得劳动者身份的保护，这进一步固化了主播群体的弱势地位。</p>
- 
+  <p>据北京市致诚律师事务所数字法治研究与服务中心研究，<strong>在254件涉及网络主播与MCN公司法律关系认定的案件中，合同纠纷案件共138件，人民法院采纳主播关于双方存在事实劳动关系抗辩意见的仅11件，占比8%；<span style="background:#8EB5DC;padding:2px 4px;">劳动争议案件共116件，人民法院判决认定双方存在劳动关系的共57件，占比近50%</span>。</strong>在裁判趋势方面，自2019年至2024年，劳动争议案件中法院确认劳动关系的比例稳定在45%至60%之间，无明显趋势变化。大量主播在司法程序中被划归为"合作关系"，MCN机构无须依照《中华人民共和国劳动合同法》的规定为主播缴纳社会保险，亦不受最低工资标准、工作时间上限、加班费支付等劳动规范的约束。近半数的主播无法获得劳动者身份的保护，这进一步固化了主播群体的弱势地位。</p>
+
+  <div style="display:flex;justify-content:center;margin:32px 0;">
+    <iframe src="https://dycharts.com/xshow/index.html?id=c_87af57fcb52e60d2d5c873bc196c2ccd" width="520" height="500" scrolling="no" frameborder="0" style="border:none;border-radius:8px;"></iframe>
+  </div>
+
   <img id="sec-business" class="chart-fade" src="MCN的生意经.PNG" alt="MCN的生意经" style="display:block;max-width:100%;margin:32px auto;">
   <p>过去十年MCN行业经历了高速发展，<strong>机构总量从2015年的160家增至2025年的近3万家，增长超过180倍，市场规模达636亿元。</strong></p>
   <div class="chart-fade" style="display:flex;justify-content:center;margin:32px 0;">    <iframe src="https://dycharts.com/xshow/index.html?id=c_64a7cc1025866b9aa58501fe85533524" width="600" height="510" scrolling="no" frameborder="0" style="border:none;border-radius:8px;"></iframe>
@@ -1144,7 +1164,6 @@ gReplyBtn.addEventListener('click', e => {
   <p>但是真正的改变，需要<strong>司法公正、监管有力、MCN经营有道与青年群体理智清醒</strong>四者合力完成。</p>
 
 
-   <br><br><br><br><br>
   <div id="sec-ending" style="background:#FFE795;padding:28px 32px;border-radius:16px;margin:32px auto;max-width:75%;">
   <p>合约不是枷锁，流量更不是人生捷径。行业监管为青年守住了法律底线；而真正能打破"必输困局"的，永远是年轻人放下一夜爆红的幻想，正视就业竞争、读懂合同、敬畏规则、理性看待数字红利。</p>
   <p>但是，滤镜下掩盖的伤口，不单属于大学生网红，还属于新就业形态的参与者、属于互联网的冲浪者、属于每个在数字时代沉浮的个体。</p>
