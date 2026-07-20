@@ -1,4 +1,4 @@
-﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿<!DOCTYPE html>
+﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
@@ -356,12 +356,7 @@ html{scroll-behavior:smooth;}
   font-family:'Source Serif SC','Noto Serif SC',Georgia,serif;
 }
 .cr-text-container .cr-text-line.visible{ opacity:1; }
-/* 图表淡入动画 */
-.chart-fade{
-  opacity:0; transform:translateY(24px);
-  transition:opacity .8s ease, transform .8s ease;
-}
-.chart-fade.visible{ opacity:1; transform:translateY(0); }
+/* 图表淡入淡出：滚动驱动，反复触发 */
 </style>
 </head>
 <body style="background:#e9f0f7;">
@@ -381,7 +376,7 @@ html{scroll-behavior:smooth;}
     <div class="g-reply-area" id="gReplyArea" style="visibility:hidden">
       <span class="g-reply-btn" id="gReplyBtn"></span>
     </div>
-    <p class="g-hint" id="gChatHint" style="display:none">你没有拒绝的选项</p>
+    <p id="gChatHint" style="display:none;animation:none;color:#7d93aa;font-size:14px;text-align:center;">你没有拒绝的选项</p>
   </div>
 </section>
 <div id="news" class="text-dark font-inter" style="background:#e9f0f7;">
@@ -992,7 +987,7 @@ gReplyBtn.addEventListener('click', e => {
 </script>
 <!-- ====== 新闻报道正文 ====== -->
 <!-- ★ 全局正文字号：修改下面 font-size 即可调整全文大小，当前 17px -->
-<article id="sec-article" class="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8" style="font-family:'Source Serif SC','Noto Serif SC',Georgia,serif;color:#2d3748;line-height:2;font-size:24px;">
+<article id="sec-article" class="py-16 px-4 sm:px-6 lg:px-8" style="width:75%;margin:0 auto;font-family:'Source Serif SC','Noto Serif SC',Georgia,serif;color:#2d3748;line-height:2;font-size:24px;">
   <h2 id="sec-intro" style="font-size:2rem;font-weight:1000;color:#1a1a2e;margin-bottom:32px;letter-spacing:-.02em;"></h2>
   <p>游戏落幕，屏幕熄灭。</p>
   <p>此刻回头审视这场步步推进的虚拟签约，你或许会真切感受到一种猝不及防的失重与慌乱：明明只是抱着课余兼职、尝试自媒体的简单初衷，全程顺从沟通、信任对方承诺、配合流程签约，从未主动违约、从未恶意跑路，最终却莫名被扣上"违约"的帽子，骤然背负起数十万元的天价赔偿债务。</p>
@@ -1013,7 +1008,7 @@ gReplyBtn.addEventListener('click', e => {
   <img id="sec-promise" class="chart-fade" src="口头画饼.PNG" alt="口头画饼与纸面枷锁" style="display:block;max-width:100%;margin:32px auto;">
   <p>北京盈科律师事务所朱晨飞律师指出，MCN机构常借合同文本玩"文字游戏"，利用高额签约费和低门槛吸引签约，再通过无法完成的考核制造违约，从中获利。<span style="background:#8EB5DC;padding:2px 4px;"><strong>在北京致诚律师事务所655起合同违约案件中，主播因违约被MCN公司起诉的案件占比高达99.5%。</strong></span></p>
 
-  <h3 style="font-size:24px;font-weight:700;color:#1a1a2e;margin:32px 0 12px;">口头承诺与书面合同背离</h3>
+  <h3 style="font-size:24px;font-weight:700;color:#1a1a2e;margin:32px 0 12px;"><span style="background:#8EB5DC;padding:2px 8px;border-radius:4px;">口头承诺与书面合同背离</span></h3>
   <p>在签约过程中先以诱人的口头承诺促成签约，再以书面合同条款锁定对方义务。这种策略贯穿于签约前、签约时及签约后三个阶段性环节。</p>
   <p data-char="zy">签约前是<strong>充满诱惑的口头承诺</strong>。"您好，我们是一家MCN公司，做素人精品IP孵化……无直播、不收费，公司一对一服务从零打造全包。"大学生郑妍在短视频平台收到这样一条私信。面对"拍不好、不会直播"的担心，对方承诺"不用直播，我们是专门打造素人的""如果效果不好只需要把公司提供的账号归还即可"。</p>
   <p data-char="zy">签约时，郑妍却发现，书面条款的内容与缔约前双方沟通过程中的意思存在根本差异——合同明确规定主播每月直播不少于24日、每日不少于3小时。公司方以<span style="background:#8EB5DC;padding:2px 4px;"><strong>"合同只是一个模板，没有实质性作用"</strong></span>为由予以回应。而郑妍，在不充分了解条款法律效力的情况下完成了签署。</p>
@@ -1025,12 +1020,12 @@ gReplyBtn.addEventListener('click', e => {
     </div>
   </div>
 
-  <h3 id="sec-balance" style="font-size:24px;font-weight:700;color:#1a1a2e;margin:32px 0 12px;">权利与义务严重失衡</h3>
+  <h3 id="sec-balance" style="font-size:24px;font-weight:700;color:#1a1a2e;margin:32px 0 12px;"><span style="background:#8EB5DC;padding:2px 8px;border-radius:4px;">权利与义务严重失衡</span></h3>
   <p>MCN合同最直观的问题，是合同条款本身的权利义务不对等。</p>
   <p data-char="xd">2026年初，大学生小蝶与某MCN公司签订合同，履行期间，公司对小蝶实施严格管控，每日强制直播7小时，请假扣薪，直播脚本由公司统一制定，这完全具备劳动关系典型的<span style="background:#8EB5DC;padding:2px 4px;"><strong>从属性特征</strong></span>——<strong>包括人格从属性、经济从属性与组织从属性，</strong><span style="background:#8EB5DC;padding:2px 4px;"><strong>已构成实质劳动关系</strong></span>，然而小蝶所签署的名为<strong>《演绎经纪合同》</strong>，这意味着公司<strong>规避劳动关系本应履行的雇主义务。</strong>当小蝶因身体不适离职，公司依据合同索赔五万元——<strong>一方有天价违约金，而另外一方没有限制</strong>，这属于典型的"霸王条款"。</p>
   <p data-char="zy">同时，主播在合同履行中的实体权利往往缺失。郑妍签署的合同仅<span style="background:#8EB5DC;padding:2px 4px;"><strong>模糊约定"符合甲方直播内容要求的直播时长，方可确认为有效直播时长"</strong></span>，<strong>但直播内容的要求缺乏具体细则，直播内容合格的评判权掌握在公司手中。</strong>这种合同使对方当事人的合同义务<strong>处于不确定状态，实质性地排除了主播在合同履行中的主要权利。</strong></p>
 
-  <h3 id="sec-labor" style="font-size:24px;font-weight:700;color:#1a1a2e;margin:32px 0 12px;">劳动关系认定的规避</h3>
+  <h3 id="sec-labor" style="font-size:24px;font-weight:700;color:#1a1a2e;margin:32px 0 12px;"><span style="background:#8EB5DC;padding:2px 8px;border-radius:4px;">劳动关系认定的规避</span></h3>
   <div style="background:#E8F2F1;padding:24px 28px;border-radius:16px;margin:24px 0;">
   <p>合同怎么定性，决定了纠纷走哪条法律程序。如果被认定为劳动关系，则适用劳动法的保护；如果被认定为合作关系，则适用民法典，MCN可以依据合同条款索要违约金。后者对内容创作者们天然不利。因此，大部分合同载明"双方仅为合作关系，不涉及劳动关系、雇佣关系"的条款。把本可能构成劳动关系的用工形式包装成民事合作，以此绕开劳动法的约束。</p>
   </div>
@@ -1062,7 +1057,7 @@ gReplyBtn.addEventListener('click', e => {
   <p>在2020—2024年间，新注册的MCN机构中，仅约<strong>31.8%</strong>能够<strong>连续稳定经营超过3年，超过68%的机构在3年内注销、吊销或停业</strong>。</p>
   <img class="chart-fade" src="机构成立年限占比.png" alt="机构成立年限占比" style="display:block;max-width:50%;margin:32px auto;">
   <br>  <br>
-  <p data-char="ll xw">在司法实践中，制造合同陷阱，索取高额违约金是普遍现象。罗莉签约后因直播时长要求陷入困境，斗鱼方面先以律师函索赔8000万元，后于仲裁申请中主张600万元。而罗莉<strong>实际直播收益远少于索赔金额。</strong>合同约定的违约金数额与实际收益之间的<strong>严重失衡，</strong>MCN机构主张的违约金时常为主播<strong>实际收益的数倍乃至数百倍。</strong>黑龙江省哈尔滨市中级人民法院审理的一起诉讼中，MCN公司上诉主张违约金149452元及律师费20000元，<strong>其名目五花八门，包括预期收益损失、运营人员工资成本、场地租赁费及甚至装修费分摊等。</strong>而当事人小王签约四个月，仅收益6025.70元。在网红与MCN公司合同纠纷中，以网络主播为主的违约方认为<strong>守约方主张的违约金过高，继而提出抗辩或反诉是最主要的争议类别，</strong>在致诚律师事务所的<span style="background:#8EB5DC;padding:2px 4px;"><strong>954起案例中占比高达68.3%</strong></span>，其中违约金最高者达<span style="background:#8EB5DC;padding:2px 4px;"><strong>4900万</strong></span>。</p>
+  <p><span data-char="ll">在司法实践中，制造合同陷阱，索取高额违约金是普遍现象。罗莉签约后因直播时长要求陷入困境，斗鱼方面先以律师函索赔8000万元，后于仲裁申请中主张600万元。而罗莉<strong>实际直播收益远少于索赔金额。</strong>合同约定的违约金数额与实际收益之间的<strong>严重失衡，</strong>MCN机构主张的违约金时常为主播<strong>实际收益的数倍乃至数百倍。</strong></span><span data-char="xw">黑龙江省哈尔滨市中级人民法院审理的一起诉讼中，MCN公司上诉主张违约金149452元及律师费20000元，<strong>其名目五花八门，包括预期收益损失、运营人员工资成本、场地租赁费及甚至装修费分摊等。</strong>而当事人小王签约四个月，仅收益6025.70元。在网红与MCN公司合同纠纷中，以网络主播为主的违约方认为<strong>守约方主张的违约金过高，继而提出抗辩或反诉是最主要的争议类别，</strong>在致诚律师事务所的<span style="background:#8EB5DC;padding:2px 4px;"><strong>954起案例中占比高达68.3%</strong></span>，其中违约金最高者达<span style="background:#8EB5DC;padding:2px 4px;"><strong>4900万</strong></span>。</span></p>
    <br>
   <p>2024年12月，央视新闻报道，一些MCN机构的盈利模式为<strong>低价签约，严苛执行，最后高价索赔。</strong>作为虎牙直播平台的"钻石公会"，随风传媒及其关联公司在2021年底至2023年6月的<strong>一年半</strong>里于广州仲裁委员会向<span style="background:#8EB5DC;padding:2px 4px;"><strong>18名</strong></span><strong>主播索赔。</strong>业内专家指出，瞄准法律意识薄弱，急于求成的青年群体，利用高额违约金牟利，这几乎成为尾部小规模MCN主要收入来源。</p>
  
@@ -1120,7 +1115,7 @@ gReplyBtn.addEventListener('click', e => {
   <p>据北京市致诚律师事务所基于近千份裁判文书的统计，在652件MCN索赔违约金的案件中，<strong>法院支持率达90.2%，判赔金额10万元以下的占54.1%，10万至50万元占25.3%，最高达4900万元。</strong></p>
   <div class="chart-fade" style="display:flex;justify-content:center;margin:32px 0;">\n    <iframe src="https://dycharts.com/xshow/index.html?id=c_2a8ec7ba880e033afe4361cd9b8f75ec" width="500" height="420" scrolling="no" frameborder="0" style="border:none;border-radius:8px;"></iframe>
   </div>
-  <p data-char="ll xw"><strong>MCN索赔获得支持的几率虽高，但法院在<span style="background:#8EB5DC;padding:0 2px;">84.9%</span>的案件中对违约金进行了削减。</strong>在斗鱼诉在校大学生罗莉案中，斗鱼索赔600万元，仲裁庭认为该金额与主播实际所得相比不合理，<strong>最终仅支持2万元，<span style="background:#8EB5DC;padding:2px 4px;">调减比例约99%</span></strong>。在小王违约金的众多名目中，法院认定，<strong>预期收益损失因直播收益不确定性不予支持</strong>；运营人员成本、场地租赁费、装修成本均为公司经营成本，<strong>与主播违约之间缺乏直接因果关系。</strong>综合考量小王大学刚毕业、直播经验尚浅等因素，酌定小王承担违约金10000元、律师费5000元。MCN原主张的169452元<strong>最终仅获支持15000元，<span style="background:#8EB5DC;padding:2px 4px;">调减比例约91%</span></strong>。<strong>可见，主播单方停播或提前解约，经法院审理认定构成违约的，应当依法承担违约责任。但法院审理时会充分考虑违约金是否过分高于MCN公司因违约所遭受的实际损失。</strong></p>
+  <p><span data-char="ll"><strong>MCN索赔获得支持的几率虽高，但法院在<span style="background:#8EB5DC;padding:0 2px;">84.9%</span>的案件中对违约金进行了削减。</strong>在斗鱼诉在校大学生罗莉案中，斗鱼索赔600万元，仲裁庭认为该金额与主播实际所得相比不合理，<strong>最终仅支持2万元，<span style="background:#8EB5DC;padding:2px 4px;">调减比例约99%</span></strong>。</span><span data-char="xw">在小王违约金的众多名目中，法院认定，<strong>预期收益损失因直播收益不确定性不予支持</strong>；运营人员成本、场地租赁费、装修成本均为公司经营成本，<strong>与主播违约之间缺乏直接因果关系。</strong>综合考量小王大学刚毕业、直播经验尚浅等因素，酌定小王承担违约金10000元、律师费5000元。MCN原主张的169452元<strong>最终仅获支持15000元，<span style="background:#8EB5DC;padding:2px 4px;">调减比例约91%</span></strong>。<strong>可见，主播单方停播或提前解约，经法院审理认定构成违约的，应当依法承担违约责任。但法院审理时会充分考虑违约金是否过分高于MCN公司因违约所遭受的实际损失。</strong></span></p>
    <br>
   <p>然而，司法裁判终究是事后纠偏，难以覆盖行业生态中的系统性问题。从法律程序来看，大学生也未必天然占据道德高地，其违约行为在合同层面确实可能成立。行政监管应该及时介入，为这一新兴行业确立清晰的规则边界，压缩MCN机构利用信息不对称和法律程序实施不当牟利的空间，推动行业规范化运营。</p>
   <!-- 云开见日：sticky 滚动驱动 -->
@@ -1170,16 +1165,23 @@ gReplyBtn.addEventListener('click', e => {
 </div>
 
 <script>
-/* ===== 图表淡入动画 ===== */
+/* ===== 图表淡入淡出：滚动驱动，反复触发 ===== */
 (function(){
-  const fadeObserver = new IntersectionObserver(function(entries){
-    entries.forEach(entry => {
-      if(entry.isIntersecting){
-        entry.target.classList.add('visible');
-      }
+  const fades = document.querySelectorAll('.chart-fade');
+  function updateFades(){
+    const vh = window.innerHeight;
+    fades.forEach(el => {
+      const rect = el.getBoundingClientRect();
+      const center = rect.top + rect.height/2;
+      // 元素中心在视口 40%~60% 处为峰值 opacity=1, 越远越淡
+      const dist = Math.abs(center - vh*0.5) / (vh*0.5);
+      const opacity = Math.max(0, 1 - dist);
+      el.style.opacity = opacity;
     });
-  }, {threshold: 0.15, rootMargin: '0px 0px -40px 0px'});
-  document.querySelectorAll('.chart-fade').forEach(el => fadeObserver.observe(el));
+  }
+  updateFades();
+  window.addEventListener('scroll', updateFades, {passive:true});
+  window.addEventListener('resize', updateFades, {passive:true});
 })();
 
 /* 左侧导航：进度条 + 章节高亮 + 点击跳转 */
@@ -1217,43 +1219,41 @@ gReplyBtn.addEventListener('click', e => {
   updateNav();
 })();
 
-/* 人物栏：引入到达屏幕上方30%时弹出，之前不显示 */
+/* 人物栏：引入到达屏幕上方30%时显示，返回封面时隐藏 */
 (function(){
   const cb = document.querySelector('.char-bar');
   const el = document.getElementById('sec-intro');
   if(!cb || !el) return;
-  let done = false;
   function check(){
-    if(done) return;
     if(el.getBoundingClientRect().top < window.innerHeight * 0.3){
-      cb.classList.add('visible'); done = true;
+      cb.classList.add('visible');
+    } else {
+      cb.classList.remove('visible');
     }
   }
   window.addEventListener('scroll', check, {passive:true});
-  check(); // 初始加载时也检查一次
+  check();
 })();
 
-/* ===== 段落悬浮联动人物栏高亮 ===== */
+/* ===== 段落悬浮联动人物栏高亮（同一时间只高亮一人） ===== */
 (function(){
   const charItems = document.querySelectorAll('.char-item[data-char]');
   const charMap = {};
   charItems.forEach(item => {
     charMap[item.dataset.char] = item;
   });
-  // 给带 data-char 的段落绑定悬浮事件
+  function clearAll(){
+    charItems.forEach(item => item.classList.remove('highlight'));
+  }
   document.querySelectorAll('[data-char]').forEach(el => {
-    if(el.classList.contains('char-item')) return; // 跳过人物栏自身
+    if(el.classList.contains('char-item')) return;
     el.addEventListener('mouseenter', function(){
-      const chars = this.dataset.char.split(' ');
-      chars.forEach(c => {
-        if(charMap[c]) charMap[c].classList.add('highlight');
-      });
+      clearAll();
+      const c = this.dataset.char.split(' ')[0]; // 只取第一个
+      if(charMap[c]) charMap[c].classList.add('highlight');
     });
     el.addEventListener('mouseleave', function(){
-      const chars = this.dataset.char.split(' ');
-      chars.forEach(c => {
-        if(charMap[c]) charMap[c].classList.remove('highlight');
-      });
+      clearAll();
     });
   });
 })();
