@@ -1,4 +1,4 @@
-﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿<!DOCTYPE html>
+﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
@@ -51,6 +51,16 @@
             }
             .hover-reveal:hover img {
                 opacity: 1 !important;
+            }
+            .pie-hover {
+                cursor: pointer;
+                text-decoration: underline;
+                text-decoration-style: dotted;
+                text-underline-offset: 4px;
+                transition: color 0.2s;
+            }
+            .pie-hover:hover {
+                color: #165DFF;
             }
             .keyword-tag {
                 transition: all 0.2s ease;
@@ -870,6 +880,120 @@ html{scroll-behavior:smooth;}
                 }
             }
         })();
+
+        // 6. 劳动法案件层级饼图（等 DOM 加载完再初始化）
+        document.addEventListener('DOMContentLoaded', function() {
+            // 饼图数据
+            const pieData = {
+                pie1: {
+                    data: [138, 116],
+                    labels: ['合同纠纷案件', '其他案件'],
+                    title: '254件涉及主播与MCN\n法律关系认定案件'
+                },
+                pie2: {
+                    data: [11, 127],
+                    labels: ['采纳抗辩意见', '未采纳/其他'],
+                    title: '138件合同纠纷案件中\n采纳抗辩意见情况'
+                },
+                pie3: {
+                    data: [57, 59],
+                    labels: ['认定劳动关系', '未认定'],
+                    title: '116件劳动争议案件中\n认定劳动关系情况'
+                }
+            };
+            const pieColors = {
+                pie1: ['#F53F3F', '#FDD5D5'],
+                pie2: ['#FF7D00', '#FFE0BF'],
+                pie3: ['#165DFF', '#D0DFFF']
+            };
+
+            // 自定义插件：在扇形上绘制数值和百分比
+            const pieLabelPlugin = {
+                id: 'pieLabel',
+                afterDraw(chart) {
+                    const ctx = chart.ctx;
+                    const dataset = chart.data.datasets[0];
+                    const meta = chart.getDatasetMeta(0);
+                    const total = dataset.data.reduce((a, b) => a + b, 0);
+                    ctx.save();
+                    meta.data.forEach((arc, i) => {
+                        const value = dataset.data[i];
+                        if (value === 0 || arc.hidden) return;
+                        const angle = (arc.startAngle + arc.endAngle) / 2;
+                        const r = (arc.outerRadius + arc.innerRadius) / 2;
+                        const x = arc.x + Math.cos(angle) * r;
+                        const y = arc.y + Math.sin(angle) * r;
+                        const pct = ((value / total) * 100).toFixed(1);
+                        ctx.fillStyle = i === 0 ? '#fff' : '#444';
+                        ctx.font = 'bold 16px "PingFang SC", "Microsoft YaHei", sans-serif';
+                        ctx.textAlign = 'center';
+                        ctx.textBaseline = 'middle';
+                        ctx.fillText(value, x, y - 10);
+                        ctx.font = '12px "PingFang SC", "Microsoft YaHei", sans-serif';
+                        ctx.fillText(pct + '%', x, y + 12);
+                    });
+                    ctx.restore();
+                }
+            };
+
+            // 初始化三个 chart 实例（先创建但默认不显示）
+            const charts = {};
+            ['pie1', 'pie2', 'pie3'].forEach(id => {
+                const ctx = document.getElementById(id);
+                if (!ctx) return;
+                charts[id] = new Chart(ctx, {
+                    type: 'doughnut',
+                    plugins: [pieLabelPlugin],
+                    data: {
+                        labels: pieData[id].labels,
+                        datasets: [{
+                            data: pieData[id].data,
+                            backgroundColor: pieColors[id],
+                            borderColor: '#ffffff',
+                            borderWidth: 3,
+                            hoverBorderWidth: 4,
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: true,
+                        cutout: '55%',
+                        plugins: {
+                            legend: {
+                                position: 'bottom',
+                                labels: { padding: 16, usePointStyle: true, font: { size: 12 } }
+                            },
+                            title: {
+                                display: true,
+                                text: pieData[id].title,
+                                font: { size: 13, weight: 'bold' },
+                                padding: { bottom: 10 }
+                            }
+                        },
+                    }
+                });
+            });
+
+            // hover 事件
+            document.querySelectorAll('.pie-hover').forEach(el => {
+                el.addEventListener('mouseenter', function() {
+                    const pieId = 'pie' + this.dataset.pie;
+                    const target = document.getElementById(pieId);
+                    if (target) {
+                        target.style.opacity = '1';
+                        target.style.transform = 'scale(1)';
+                    }
+                });
+                el.addEventListener('mouseleave', function() {
+                    const pieId = 'pie' + this.dataset.pie;
+                    const target = document.getElementById(pieId);
+                    if (target) {
+                        target.style.opacity = '0';
+                        target.style.transform = 'scale(0.85)';
+                    }
+                });
+            });
+        });
     </script>
 <script>
 const rounds = [
@@ -1046,10 +1170,15 @@ gReplyBtn.addEventListener('click', e => {
   <p>合同怎么定性，决定了纠纷走哪条法律程序。如果被认定为劳动关系，则适用劳动法的保护；如果被认定为合作关系，则适用民法典，MCN可以依据合同条款索要违约金。后者对内容创作者们天然不利。因此，大部分合同载明"双方仅为合作关系，不涉及劳动关系、雇佣关系"的条款。把本可能构成劳动关系的用工形式包装成民事合作，以此绕开劳动法的约束。</p>
   </div>
 
-  <p>据北京市致诚律师事务所数字法治研究与服务中心研究，<strong>在254件涉及网络主播与MCN公司法律关系认定的案件中，合同纠纷案件共138件，人民法院采纳主播关于双方存在事实劳动关系抗辩意见的仅11件，占比8%；<span style="background:#8EB5DC;padding:2px 4px;">劳动争议案件共116件，人民法院判决认定双方存在劳动关系的共57件，占比近50%</span>。</strong>在裁判趋势方面，自2019年至2024年，劳动争议案件中法院确认劳动关系的比例稳定在45%至60%之间，无明显趋势变化。大量主播在司法程序中被划归为"合作关系"，MCN机构无须依照《中华人民共和国劳动合同法》的规定为主播缴纳社会保险，亦不受最低工资标准、工作时间上限、加班费支付等劳动规范的约束。近半数的主播无法获得劳动者身份的保护，这进一步固化了主播群体的弱势地位。</p>
+  <p>据北京市致诚律师事务所数字法治研究与服务中心研究，<strong><span class="pie-hover" data-pie="1">在254件涉及网络主播与MCN公司法律关系认定的案件中，合同纠纷案件共138件</span>，<span class="pie-hover" data-pie="2">人民法院采纳主播关于双方存在事实劳动关系抗辩意见的仅11件，占比8%</span>；<span class="pie-hover" data-pie="3">劳动争议案件共116件，人民法院判决认定双方存在劳动关系的共57件，占比近50%</span>。</strong>在裁判趋势方面，自2019年至2024年，劳动争议案件中法院确认劳动关系的比例稳定在45%至60%之间，无明显趋势变化。大量主播在司法程序中被划归为"合作关系"，MCN机构无须依照《中华人民共和国劳动合同法》的规定为主播缴纳社会保险，亦不受最低工资标准、工作时间上限、加班费支付等劳动规范的约束。近半数的主播无法获得劳动者身份的保护，这进一步固化了主播群体的弱势地位。</p>
 
-  <div style="display:flex;justify-content:center;margin:32px 0;">
-    <iframe src="https://dycharts.com/xshow/index.html?id=c_87af57fcb52e60d2d5c873bc196c2ccd" width="520" height="500" scrolling="no" frameborder="0" style="border:none;border-radius:8px;"></iframe>
+  <div style="display:flex;justify-content:center;align-items:flex-start;gap:55px;margin:32px 0;flex-wrap:wrap;">
+    <iframe src="https://dycharts.com/xshow/index.html?id=c_87af57fcb52e60d2d5c873bc196c2ccd" width="520" height="490" scrolling="no" frameborder="0" style="border:none;border-radius:8px;flex-shrink:0;"></iframe>
+    <div id="pieChartArea" style="width:380px;height:380px;position:relative;flex-shrink:0;">
+      <canvas id="pie1" width="380" height="380" style="opacity:0;transform:scale(0.85);transition:opacity 0.4s ease,transform 0.4s ease;position:absolute;top:0;left:0;pointer-events:none;"></canvas>
+      <canvas id="pie2" width="380" height="380" style="opacity:0;transform:scale(0.85);transition:opacity 0.4s ease,transform 0.4s ease;position:absolute;top:0;left:0;pointer-events:none;"></canvas>
+      <canvas id="pie3" width="380" height="380" style="opacity:0;transform:scale(0.85);transition:opacity 0.4s ease,transform 0.4s ease;position:absolute;top:0;left:0;pointer-events:none;"></canvas>
+    </div>
   </div>
 
   <img id="sec-business" class="chart-fade" src="MCN的生意经.PNG" alt="MCN的生意经" style="display:block;max-width:100%;margin:32px auto;">
